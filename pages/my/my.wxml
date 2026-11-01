@@ -1,0 +1,29 @@
+<view class="page my-page">
+  <view class="card profile">
+    <view class="profile-avatar">柠</view>
+    <view class="profile-info">
+      <text class="profile-name">到店客人</text>
+      <text class="profile-hint">演示模式 · 本地模拟数据</text>
+    </view>
+    <text class="demo-tag">DEMO</text>
+  </view>
+
+  <view class="card entry-group">
+    <view class="entry-item" bindtap="onAdminTap">
+      <text class="entry-label">管理后台</text>
+      <text class="entry-value">M3 开放</text>
+    </view>
+    <view class="entry-item" bindtap="onAboutTap">
+      <text class="entry-label">关于柠舍唔同</text>
+      <text class="entry-value">→</text>
+    </view>
+    <view class="entry-item" wx:if="{{isDev}}" bindtap="onDevCheck">
+      <text class="entry-label">开发自检</text>
+      <text class="entry-value entry-dev">DEV</text>
+    </view>
+  </view>
+
+  <view class="my-footer">
+    <text>演示版本 v{{version}} · 所有数据均为示例</text>
+  </view>
+</view>

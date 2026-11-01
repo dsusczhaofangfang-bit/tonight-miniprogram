@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "酒单",
+  "usingComponents": {
+    "product-card": "/components/product-card/product-card",
+    "empty-state": "/components/empty-state/empty-state"
+  }
+}

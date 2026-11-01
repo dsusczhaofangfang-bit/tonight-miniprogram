@@ -1,0 +1,14 @@
+<view class="product-card" bindtap="onTap">
+  <view class="product-cover" style="background: {{cover}};">
+    <text class="product-cover-tag">示例</text>
+  </view>
+  <view class="product-body">
+    <text class="product-name">{{product.name}}</text>
+    <text class="product-name-en">{{product.nameEn}}</text>
+    <text class="product-desc">{{product.desc}}</text>
+    <view class="product-footer">
+      <view class="product-price"><text class="product-yen">¥</text>{{priceText}}</view>
+      <view class="product-add" catchtap="onAdd">＋</view>
+    </view>
+  </view>
+</view>

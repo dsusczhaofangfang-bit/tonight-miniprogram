@@ -1,0 +1,90 @@
+@import "styles/theme.wxss";
+
+view,
+text,
+image,
+button,
+scroll-view,
+input,
+textarea {
+  box-sizing: border-box;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  line-height: inherit;
+  border-radius: 0;
+  font-size: inherit;
+}
+
+button::after {
+  border: none;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 40rpx 32rpx calc(40rpx + env(safe-area-inset-bottom));
+}
+
+.serif-title {
+  font-size: 44rpx;
+  letter-spacing: 6rpx;
+  color: var(--cream, #F4ECDF);
+}
+
+.section-title {
+  font-size: 32rpx;
+  letter-spacing: 4rpx;
+  color: var(--champagne, #C9A86E);
+  margin-bottom: 24rpx;
+}
+
+.muted {
+  color: var(--muted, #A08F7E);
+}
+
+.hairline {
+  height: 1rpx;
+  background: var(--line, rgba(201, 168, 110, 0.25));
+}
+
+.demo-tag {
+  display: inline-block;
+  padding: 2rpx 12rpx;
+  border: 1rpx solid var(--line, rgba(201, 168, 110, 0.25));
+  border-radius: 999rpx;
+  font-size: 20rpx;
+  color: var(--muted, #A08F7E);
+  letter-spacing: 2rpx;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 88rpx;
+  border-radius: 12rpx;
+  font-size: 30rpx;
+  letter-spacing: 4rpx;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #5A1A24, #7A2433);
+  color: var(--cream, #F4ECDF);
+  border: 1rpx solid rgba(201, 168, 110, 0.45);
+}
+
+.btn-ghost {
+  border: 1rpx solid rgba(201, 168, 110, 0.45);
+  color: var(--champagne, #C9A86E);
+}
+
+.card {
+  background: var(--card, #17110D);
+  border: 1rpx solid rgba(201, 168, 110, 0.16);
+  border-radius: 16rpx;
+  padding: 28rpx;
+}

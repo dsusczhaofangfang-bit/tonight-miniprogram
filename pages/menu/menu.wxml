@@ -1,0 +1,32 @@
+<view class="page menu-page">
+  <view class="menu-head">
+    <text class="menu-title">酒单</text>
+    <text class="menu-sub">MENU · 示例数据</text>
+  </view>
+
+  <scroll-view class="category-bar" scroll-x enhanced show-scrollbar="{{false}}">
+    <view
+      class="category-item {{item.id === activeId ? 'is-active' : ''}}"
+      wx:for="{{categories}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onCategoryTap"
+    >
+      {{item.name}}
+    </view>
+  </scroll-view>
+
+  <view class="product-grid" wx:if="{{products.length}}">
+    <view class="product-cell" wx:for="{{products}}" wx:key="id">
+      <product-card
+        product="{{item}}"
+        bind:select="onProductTap"
+        bind:add="onAdd"
+      ></product-card>
+    </view>
+  </view>
+
+  <empty-state wx:if="{{!loading && !products.length}}" text="该分类暂无在售商品" hint="可切换其他分类看看"></empty-state>
+
+  <view class="loading-tip" wx:if="{{loading}}">加载中…</view>
+</view>

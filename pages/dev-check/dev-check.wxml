@@ -1,0 +1,24 @@
+<view class="page dev-page">
+  <view class="dev-head">
+    <text class="dev-title">开发自检</text>
+    <text class="dev-sub">Mock 数据层连通性检查 · v{{version}}</text>
+  </view>
+
+  <view class="card check-list">
+    <view class="check-item" wx:for="{{checks}}" wx:key="name">
+      <view class="check-dot {{item.ok ? 'is-ok' : 'is-fail'}}"></view>
+      <text class="check-name">{{item.name}}</text>
+      <text class="check-detail">{{item.detail}}</text>
+    </view>
+    <view class="check-empty" wx:if="{{!checks.length}}">检查中…</view>
+  </view>
+
+  <view class="dev-actions">
+    <button class="btn btn-ghost" bindtap="runChecks">重新检测</button>
+    <button class="btn btn-ghost reset-btn" bindtap="onReset">重置演示数据</button>
+  </view>
+
+  <view class="dev-note">
+    <text>本页仅在开发版「我的」中显示；正式发布后不会出现。</text>
+  </view>
+</view>

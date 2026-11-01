@@ -1,0 +1,29 @@
+.stepper {
+  display: flex;
+  align-items: center;
+}
+
+.stepper-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52rpx;
+  height: 52rpx;
+  border: 1rpx solid rgba(201, 168, 110, 0.5);
+  border-radius: 50%;
+  color: #D9A45B;
+  font-size: 30rpx;
+  line-height: 1;
+}
+
+.stepper-btn.is-disabled {
+  border-color: rgba(160, 143, 126, 0.25);
+  color: rgba(160, 143, 126, 0.4);
+}
+
+.stepper-num {
+  min-width: 64rpx;
+  color: #F4ECDF;
+  font-size: 30rpx;
+  text-align: center;
+}

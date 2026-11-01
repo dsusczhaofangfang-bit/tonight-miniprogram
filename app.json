@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/welcome/welcome",
+    "pages/home/home",
+    "pages/menu/menu",
+    "pages/my/my",
+    "pages/dev-check/dev-check"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#0B0A09",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "柠舍唔同",
+    "backgroundColor": "#0B0A09",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#A08F7E",
+    "selectedColor": "#D9A45B",
+    "backgroundColor": "#14100D",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "assets/icons/tab-home.png",
+        "selectedIconPath": "assets/icons/tab-home-active.png"
+      },
+      {
+        "pagePath": "pages/menu/menu",
+        "text": "酒单",
+        "iconPath": "assets/icons/tab-menu.png",
+        "selectedIconPath": "assets/icons/tab-menu-active.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "assets/icons/tab-my.png",
+        "selectedIconPath": "assets/icons/tab-my-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

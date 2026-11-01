@@ -1,0 +1,21 @@
+/* 全局设计 token：色板、字体、基础排版 */
+page {
+  --bg-ink: #0B0A09;
+  --bg-walnut: #241610;
+  --card: #17110D;
+  --wine: #5A1A24;
+  --rose: #A32B41;
+  --amber: #D9A45B;
+  --champagne: #C9A86E;
+  --cream: #F4ECDF;
+  --muted: #A08F7E;
+  --line: rgba(201, 168, 110, 0.25);
+  --shadow: 0 12rpx 40rpx rgba(0, 0, 0, 0.45);
+
+  background-color: var(--bg-ink);
+  color: var(--cream);
+  font-family: "Songti SC", "Noto Serif SC", "STSong", "SimSun", serif;
+  font-size: 28rpx;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}

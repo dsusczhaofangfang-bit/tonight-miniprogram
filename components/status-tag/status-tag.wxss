@@ -1,0 +1,29 @@
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4rpx 16rpx;
+  border: 1rpx solid currentColor;
+  border-radius: 999rpx;
+  font-size: 22rpx;
+  letter-spacing: 2rpx;
+}
+
+.status-tag--amber {
+  color: #D9A45B;
+}
+
+.status-tag--champagne {
+  color: #C9A86E;
+}
+
+.status-tag--rose {
+  color: #D06A7C;
+}
+
+.status-tag--green {
+  color: #9DB39A;
+}
+
+.status-tag--muted {
+  color: #A08F7E;
+}

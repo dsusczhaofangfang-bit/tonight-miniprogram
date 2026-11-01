@@ -1,0 +1,42 @@
+<view class="page home-page">
+  <view class="hero">
+    <text class="hero-eyebrow">COCKTAIL &amp; WHISKEY BAR</text>
+    <text class="hero-title">柠舍唔同</text>
+    <view class="hero-rule"></view>
+    <text class="hero-slogan">{{shop.slogan || '今夜，来点不一样的。'}}</text>
+
+    <view class="hero-actions">
+      <button class="btn btn-primary hero-btn" bindtap="onStartOrder">开始点单</button>
+      <text class="hero-link" bindtap="onViewMenu">先看看酒单 →</text>
+    </view>
+  </view>
+
+  <view class="card shop-card" wx:if="{{shop}}">
+    <view class="shop-head">
+      <text class="shop-title">到店信息</text>
+      <text class="demo-tag">示例信息</text>
+    </view>
+
+    <view class="shop-row">
+      <text class="shop-label">地址</text>
+      <text class="shop-value">{{shop.address}}</text>
+    </view>
+    <view class="shop-row">
+      <text class="shop-label">营业</text>
+      <text class="shop-value">{{shop.hours}}</text>
+    </view>
+    <view class="shop-row">
+      <text class="shop-label">电话</text>
+      <text class="shop-value">{{shop.phone}}</text>
+    </view>
+
+    <view class="shop-actions">
+      <view class="shop-action" bindtap="onMapTap">地图导航</view>
+      <view class="shop-action" bindtap="onCallTap">拨打电话</view>
+    </view>
+  </view>
+
+  <view class="home-footer">
+    <text>演示版本 v{{version}} · 示例数据，待替换</text>
+  </view>
+</view>
