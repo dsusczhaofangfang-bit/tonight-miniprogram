@@ -1,0 +1,10 @@
+<view class="petal-layer {{paused ? 'is-paused' : ''}}" aria-hidden="true">
+  <view
+    wx:for="{{petals}}"
+    wx:key="id"
+    class="petal {{item.layer === 'back' ? 'petal--back' : 'petal--front'}} petal--track-{{item.track}}"
+    style="left: {{item.left}}%; width: {{item.size}}rpx; height: {{item.size}}rpx; opacity: {{item.opacity}}; animation-duration: {{item.duration}}s; animation-delay: {{item.delay}}s;"
+  >
+    <image class="petal__image" src="{{item.image}}" mode="aspectFit" aria-hidden="true"></image>
+  </view>
+</view>

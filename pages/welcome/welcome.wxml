@@ -1,15 +1,20 @@
 <view class="welcome">
-  <view class="welcome-glow"></view>
+  <view class="welcome-glow" aria-hidden="true"></view>
+  <petal-layer count="{{petalCount}}" />
 
   <view class="welcome-brand">
-    <text class="brand-en">COCKTAIL &amp; WHISKEY BAR</text>
     <text class="brand-cn">柠舍唔同</text>
-    <view class="brand-rule"></view>
-    <text class="brand-slogan">今夜，来点不一样的。欢迎来到柠舍唔同。</text>
+    <text class="brand-en">COCKTAIL &amp; WHISKEY BAR</text>
+    <view class="brand-rule" aria-hidden="true"></view>
+    <view class="welcome-copy">
+      <text>今夜，来点不一样的。</text>
+      <text>欢迎来到柠舍唔同。</text>
+    </view>
   </view>
 
+  <view class="skip" hover-class="skip--pressed" bindtap="onSkip">跳过</view>
+
   <view class="welcome-actions">
-    <button class="enter-btn" bindtap="onEnter">进入酒馆</button>
-    <text class="skip-btn" bindtap="onSkip">跳过</text>
+    <button class="enter-btn" hover-class="enter-btn--pressed" bindtap="onEnter">进入酒馆</button>
   </view>
 </view>

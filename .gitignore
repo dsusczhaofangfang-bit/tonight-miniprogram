@@ -20,6 +20,10 @@ Thumbs.db
 tmp/
 dist/
 
+# Python 缓存
+__pycache__/
+*.pyc
+
 # 本地环境变量
 .env
 .env.*

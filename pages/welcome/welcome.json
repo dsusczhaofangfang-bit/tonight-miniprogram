@@ -1,4 +1,7 @@
 {
   "navigationStyle": "custom",
-  "navigationBarTitleText": "柠舍唔同"
+  "navigationBarTitleText": "柠舍唔同",
+  "usingComponents": {
+    "petal-layer": "/components/petal-layer/petal-layer"
+  }
 }

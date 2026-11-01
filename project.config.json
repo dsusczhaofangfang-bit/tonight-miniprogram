@@ -2,7 +2,12 @@
   "description": "柠舍唔同 · COCKTAIL & WHISKEY BAR 小程序",
   "packOptions": {
     "ignore": [],
-    "include": []
+    "include": [
+      {
+        "type": "folder",
+        "value": "assets/petals"
+      }
+    ]
   },
   "setting": {
     "urlCheck": true,
