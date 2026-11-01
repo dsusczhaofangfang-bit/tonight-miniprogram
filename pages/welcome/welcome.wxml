@@ -1,7 +1,4 @@
 <view class="welcome">
-  <view class="welcome-glow" aria-hidden="true"></view>
-  <petal-layer count="{{petalCount}}" />
-
   <view class="welcome-brand">
     <text class="brand-cn">柠舍唔同</text>
     <text class="brand-en">COCKTAIL &amp; WHISKEY BAR</text>

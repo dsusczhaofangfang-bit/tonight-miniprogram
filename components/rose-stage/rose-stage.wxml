@@ -1,0 +1,17 @@
+<view class="rose" style="top: {{top}}; width: {{width}};">
+  <view
+    class="rose__dissolve"
+    style="animation-duration: {{dissolveMs}}ms; animation-delay: {{dissolveAt}}ms;"
+  >
+    <view
+      wx:if="{{halo}}"
+      class="rose__halo"
+      style="animation-delay: {{appearDelay}}ms;"
+      aria-hidden="true"
+    ></view>
+
+    <view class="rose__appear" style="animation-delay: {{appearDelay}}ms;">
+      <image class="rose__img" src="{{src}}" mode="widthFix"></image>
+    </view>
+  </view>
+</view>

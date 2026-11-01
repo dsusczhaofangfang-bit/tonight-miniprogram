@@ -1,20 +1,22 @@
-"""生成欢迎页玫瑰花瓣占位素材（开发辅助脚本，可重复执行）。
+"""生成欢迎页玫瑰花瓣"占位"素材（仅用于没有真实素材时，默认不覆盖已存在文件）。
 
 用法：
-    python scripts/gen_petals.py
+    python scripts/gen_petal_placeholders.py           # 已存在则跳过
+    python scripts/gen_petal_placeholders.py --force   # 强制重写
 
 输出：
-    assets/petals/petal-01.png ~ petal-04.png
+    assets/_src/placeholders/petal-01.png ~ petal-04.png
 
 说明：
-    1. 4 种形态，128x128 RGBA 透明底，显示尺寸由 WXSS 控制在 18–48rpx。
-    2. 素材为占位玫瑰花瓣，不含文字、Logo、印章或水印；
-       后续有真实素材时，保持文件名不变直接替换即可，不需要改页面代码。
-    3. 只使用 Pillow，不依赖网络；重复执行会覆盖同名文件。
+    1. 4 种形态，128x128 RGBA 透明底，程序生成的占位花瓣，不是真实素材。
+    2. 正式素材在 assets/_src/petals/（真实玫瑰照片抠图），本脚本永不写那里，
+       也不写 assets/petals/（进包的派生图由 prepare_rose_assets.py 生成）。
+    3. 只使用 Pillow，不依赖网络；--force 才会覆盖同名文件。
 """
 
 import math
 import os
+import sys
 
 from PIL import Image, ImageDraw, ImageFilter
 
@@ -25,7 +27,8 @@ CANVAS = SIZE * SCALE
 OUT_DIR = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
     "assets",
-    "petals",
+    "_src",
+    "placeholders",
 )
 
 
@@ -205,14 +208,17 @@ PETALS = (
 )
 
 
-def main():
+def main(force=False):
     os.makedirs(OUT_DIR, exist_ok=True)
     for config in PETALS:
-        image = build_petal(config)
         path = os.path.join(OUT_DIR, f"{config['name']}.png")
+        if os.path.exists(path) and not force:
+            print("skip (already exists, use --force):", path)
+            continue
+        image = build_petal(config)
         image.save(path, "PNG", optimize=True)
         print("generated:", path)
 
 
 if __name__ == "__main__":
-    main()
+    main(force="--force" in sys.argv[1:])

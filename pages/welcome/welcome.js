@@ -1,13 +1,8 @@
 const SKIP_READY_MS = 800;
-const ENTER_READY_MS = 2600;
-
-// 默认为 8 片。真机走查确认低端机掉帧时，只需把这里改为 4。
-const PETAL_COUNT = 8;
+const ENTER_READY_MS = 900;
 
 Page({
-  data: {
-    petalCount: PETAL_COUNT
-  },
+  data: {},
 
   onLoad() {
     this._startedAt = Date.now();

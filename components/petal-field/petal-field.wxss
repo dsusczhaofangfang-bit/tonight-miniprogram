@@ -1,0 +1,451 @@
+/* 花瓣场：整个组件压在玫瑰之下（z-index 1 < rose-stage 的 3），
+   hero 与 ambient 再各自分层。文字恒在 z-index 6，花瓣不可能遮挡文字。 */
+.petal-field {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.petal-field__ambient {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.petal-field__hero {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+}
+
+/* ---------- 环境层：无限循环 ---------- */
+
+.petal-field__amb {
+  position: absolute;
+  top: -180rpx;
+  display: block;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+  will-change: transform;
+}
+
+.petal-field__amb-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- 主角层：从玫瑰中心散开 ---------- */
+
+/* 原点必须等于玫瑰中心：rose-stage 的 top:30vh + 高度 442rpx 的一半。
+   改玫瑰尺寸时必须同步这里。 */
+.petal-field__hero-item {
+  position: absolute;
+  top: calc(30vh + 221rpx);
+  left: 50%;
+  width: 0;
+  height: 0;
+  animation-duration: 8s, 320ms;
+  animation-delay: 1s, 900ms;
+  animation-fill-mode: both, both;
+  will-change: transform;
+}
+
+.petal-field__hero-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  transform: translate(-50%, -50%);
+}
+
+.petal-field__hero-img--mirror {
+  transform: translate(-50%, -50%) scaleX(-1);
+}
+
+.petal-field.is-paused .petal-field__amb,
+.petal-field.is-paused .petal-field__hero-item {
+  animation-play-state: paused;
+}
+
+/* ---------- 环境层轨迹 ---------- */
+
+@keyframes track-a {
+  0% {
+    transform: translate3d(0, -8vh, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(80rpx, 120vh, 0) rotate(360deg);
+  }
+}
+
+@keyframes track-b {
+  0% {
+    transform: translate3d(0, -8vh, 0) rotate(24deg);
+  }
+  52% {
+    transform: translate3d(-70rpx, 52vh, 0) rotate(220deg);
+  }
+  100% {
+    transform: translate3d(36rpx, 120vh, 0) rotate(420deg);
+  }
+}
+
+@keyframes track-c {
+  0% {
+    transform: translate3d(0, -8vh, 0) rotate(-18deg);
+  }
+  46% {
+    transform: translate3d(64rpx, 46vh, 0) rotate(150deg);
+  }
+  100% {
+    transform: translate3d(-28rpx, 120vh, 0) rotate(360deg);
+  }
+}
+
+@keyframes track-d {
+  0% {
+    transform: translate3d(0, -8vh, 0) rotate(10deg);
+  }
+  50% {
+    transform: translate3d(-80rpx, 50vh, 0) rotate(260deg);
+  }
+  100% {
+    transform: translate3d(18rpx, 120vh, 0) rotate(540deg);
+  }
+}
+
+/* 近景专用：横向漂移压到 ±24rpx，保证大花瓣始终留在两侧安全带内 */
+@keyframes near-a {
+  0% {
+    transform: translate3d(0, -12vh, 0) rotate(0deg) scale(1.08);
+  }
+  100% {
+    transform: translate3d(24rpx, 120vh, 0) rotate(170deg) scale(1.14);
+  }
+}
+
+@keyframes near-b {
+  0% {
+    transform: translate3d(0, -12vh, 0) rotate(-12deg) scale(1.06);
+  }
+  100% {
+    transform: translate3d(-20rpx, 120vh, 0) rotate(-190deg) scale(1.12);
+  }
+}
+
+.petal-field__amb.track-a {
+  animation-name: track-a;
+}
+
+.petal-field__amb.track-b {
+  animation-name: track-b;
+}
+
+.petal-field__amb.track-c {
+  animation-name: track-c;
+}
+
+.petal-field__amb.track-d {
+  animation-name: track-d;
+}
+
+.petal-field__amb.near-a {
+  animation-name: near-a;
+}
+
+.petal-field__amb.near-b {
+  animation-name: near-b;
+}
+
+/* ---------- 主角层：12 条爆发轨迹 ----------
+   0% 停在簇内坐标（被不透明玫瑰遮住）；
+   8% / 15% 完成外扩与旋转（对应 1.0s–2.2s 的解体）；
+   15% 之后改为 linear，转为匀速飘落直到出屏。
+   每条 keyframe 自带 timing-function，避免整段共用一个缓动曲线导致"飘落突然停住"。 */
+
+@keyframes hero-01 {
+  0% {
+    transform: translate3d(-59rpx, -44rpx, 0) scale(0.48) rotate(0deg);
+    animation-timing-function: cubic-bezier(0.12, 0.72, 0.28, 1);
+  }
+  8% {
+    transform: translate3d(-149rpx, -98rpx, 0) scale(0.7) rotate(-148deg);
+    animation-timing-function: cubic-bezier(0.16, 0.84, 0.44, 1);
+  }
+  15% {
+    transform: translate3d(-209rpx, -134rpx, 0) scale(0.92) rotate(-224deg);
+    animation-timing-function: linear;
+  }
+  100% {
+    transform: translate3d(-246rpx, 120vh, 0) scale(1.05) rotate(-330deg);
+  }
+}
+
+@keyframes hero-02 {
+  0% {
+    transform: translate3d(30rpx, -71rpx, 0) scale(0.48) rotate(0deg);
+    animation-timing-function: cubic-bezier(0.12, 0.72, 0.28, 1);
+  }
+  8% {
+    transform: translate3d(102rpx, -137rpx, 0) scale(0.7) rotate(117deg);
+    animation-timing-function: cubic-bezier(0.16, 0.84, 0.44, 1);
+  }
+  15% {
+    transform: translate3d(150rpx, -181rpx, 0) scale(0.92) rotate(177deg);
+    animation-timing-function: linear;
+  }
+  100% {
+    transform: translate3d(180rpx, 120vh, 0) scale(1.05) rotate(260deg);
+  }
+}
+
+@keyframes hero-03 {
+  0% {
+    transform: translate3d(-20rpx, 9rpx, 0) scale(0.48) rotate(0deg);
+    animation-timing-function: cubic-bezier(0.12, 0.72, 0.28, 1);
+  }
+  8% {
+    transform: translate3d(-56rpx, -87rpx, 0) scale(0.7) rotate(-135deg);
+    animation-timing-function: cubic-bezier(0.16, 0.84, 0.44, 1);
+  }
+  15% {
+    transform: translate3d(-80rpx, -151rpx, 0) scale(0.92) rotate(-204deg);
+    animation-timing-function: linear;
+  }
+  100% {
+    transform: translate3d(-95rpx, 120vh, 0) scale(1.05) rotate(-300deg);
+  }
+}
+
+@keyframes hero-04 {
+  0% {
+    transform: translate3d(59rpx, -9rpx, 0) scale(0.48) rotate(0deg);
+    animation-timing-function: cubic-bezier(0.12, 0.72, 0.28, 1);
+  }
+  8% {
+    transform: translate3d(161rpx, -27rpx, 0) scale(0.7) rotate(135deg);
+    animation-timing-function: cubic-bezier(0.16, 0.84, 0.44, 1);
+  }
+  15% {
+    transform: translate3d(229rpx, -39rpx, 0) scale(0.92) rotate(204deg);
+    animation-timing-function: linear;
+  }
+  100% {
+    transform: translate3d(272rpx, 120vh, 0) scale(1.05) rotate(300deg);
+  }
+}
+
+@keyframes hero-05 {
+  0% {
+    transform: translate3d(-79rpx, 27rpx, 0) scale(0.48) rotate(0deg);
+    animation-timing-function: cubic-bezier(0.12, 0.72, 0.28, 1);
+  }
+  8% {
+    transform: translate3d(-193rpx, 15rpx, 0) scale(0.7) rotate(-108deg);
+    animation-timing-function: cubic-bezier(0.16, 0.84, 0.44, 1);
+  }
+  15% {
+    transform: translate3d(-269rpx, 7rpx, 0) scale(0.92) rotate(-163deg);
+    animation-timing-function: linear;
+  }
+  100% {
+    transform: translate3d(-316rpx, 120vh, 0) scale(1.05) rotate(-240deg);
+  }
+}
+
+@keyframes hero-06 {
+  0% {
+    transform: translate3d(10rpx, 53rpx, 0) scale(0.48) rotate(0deg);
+    animation-timing-function: cubic-bezier(0.12, 0.72, 0.28, 1);
+  }
+  8% {
+    transform: translate3d(34rpx, -55rpx, 0) scale(0.7) rotate(81deg);
+    animation-timing-function: cubic-bezier(0.16, 0.84, 0.44, 1);
+  }
+  15% {
+    transform: translate3d(50rpx, -127rpx, 0) scale(0.92) rotate(122deg);
+    animation-timing-function: linear;
+  }
+  100% {
+    transform: translate3d(60rpx, 120vh, 0) scale(1.05) rotate(180deg);
+  }
+}
+
+@keyframes hero-07 {
+  0% {
+    transform: translate3d(-30rpx, -88rpx, 0) scale(0.48) rotate(0deg);
+    animation-timing-function: cubic-bezier(0.12, 0.72, 0.28, 1);
+  }
+  8% {
+    transform: translate3d(-84rpx, -172rpx, 0) scale(0.7) rotate(-72deg);
+    animation-timing-function: cubic-bezier(0.16, 0.84, 0.44, 1);
+  }
+  15% {
+    transform: translate3d(-120rpx, -228rpx, 0) scale(0.92) rotate(-109deg);
+    animation-timing-function: linear;
+  }
+  100% {
+    transform: translate3d(-142rpx, 120vh, 0) scale(1.05) rotate(-160deg);
+  }
+}
+
+@keyframes hero-08 {
+  0% {
+    transform: translate3d(79rpx, 44rpx, 0) scale(0.48) rotate(0deg);
+    animation-timing-function: cubic-bezier(0.12, 0.72, 0.28, 1);
+  }
+  8% {
+    transform: translate3d(199rpx, 68rpx, 0) scale(0.7) rotate(144deg);
+    animation-timing-function: cubic-bezier(0.16, 0.84, 0.44, 1);
+  }
+  15% {
+    transform: translate3d(279rpx, 84rpx, 0) scale(0.92) rotate(218deg);
+    animation-timing-function: linear;
+  }
+  100% {
+    transform: translate3d(329rpx, 120vh, 0) scale(1.05) rotate(320deg);
+  }
+}
+
+@keyframes hero-09 {
+  0% {
+    transform: translate3d(-99rpx, -27rpx, 0) scale(0.48) rotate(0deg);
+    animation-timing-function: cubic-bezier(0.12, 0.72, 0.28, 1);
+  }
+  8% {
+    transform: translate3d(-201rpx, 9rpx, 0) scale(0.7) rotate(-126deg);
+    animation-timing-function: cubic-bezier(0.16, 0.84, 0.44, 1);
+  }
+  15% {
+    transform: translate3d(-269rpx, 33rpx, 0) scale(0.92) rotate(-190deg);
+    animation-timing-function: linear;
+  }
+  100% {
+    transform: translate3d(-312rpx, 120vh, 0) scale(1.05) rotate(-280deg);
+  }
+}
+
+@keyframes hero-10 {
+  0% {
+    transform: translate3d(40rpx, -44rpx, 0) scale(0.48) rotate(0deg);
+    animation-timing-function: cubic-bezier(0.12, 0.72, 0.28, 1);
+  }
+  8% {
+    transform: translate3d(94rpx, -134rpx, 0) scale(0.7) rotate(90deg);
+    animation-timing-function: cubic-bezier(0.16, 0.84, 0.44, 1);
+  }
+  15% {
+    transform: translate3d(130rpx, -194rpx, 0) scale(0.92) rotate(136deg);
+    animation-timing-function: linear;
+  }
+  100% {
+    transform: translate3d(152rpx, 120vh, 0) scale(1.05) rotate(200deg);
+  }
+}
+
+@keyframes hero-11 {
+  0% {
+    transform: translate3d(-49rpx, 62rpx, 0) scale(0.48) rotate(0deg);
+    animation-timing-function: cubic-bezier(0.12, 0.72, 0.28, 1);
+  }
+  8% {
+    transform: translate3d(-73rpx, -58rpx, 0) scale(0.7) rotate(-86deg);
+    animation-timing-function: cubic-bezier(0.16, 0.84, 0.44, 1);
+  }
+  15% {
+    transform: translate3d(-89rpx, -138rpx, 0) scale(0.92) rotate(-129deg);
+    animation-timing-function: linear;
+  }
+  100% {
+    transform: translate3d(-99rpx, 120vh, 0) scale(1.05) rotate(-190deg);
+  }
+}
+
+@keyframes hero-12 {
+  0% {
+    transform: translate3d(20rpx, -18rpx, 0) scale(0.48) rotate(0deg);
+    animation-timing-function: cubic-bezier(0.12, 0.72, 0.28, 1);
+  }
+  8% {
+    transform: translate3d(104rpx, -60rpx, 0) scale(0.7) rotate(108deg);
+    animation-timing-function: cubic-bezier(0.16, 0.84, 0.44, 1);
+  }
+  15% {
+    transform: translate3d(160rpx, -88rpx, 0) scale(0.92) rotate(163deg);
+    animation-timing-function: linear;
+  }
+  100% {
+    transform: translate3d(195rpx, 120vh, 0) scale(1.05) rotate(240deg);
+  }
+}
+
+.petal-field__hero-item.hero-01 {
+  animation-name: hero-01, hero-fade;
+}
+
+.petal-field__hero-item.hero-02 {
+  animation-name: hero-02, hero-fade;
+}
+
+.petal-field__hero-item.hero-03 {
+  animation-name: hero-03, hero-fade;
+}
+
+.petal-field__hero-item.hero-04 {
+  animation-name: hero-04, hero-fade;
+}
+
+.petal-field__hero-item.hero-05 {
+  animation-name: hero-05, hero-fade;
+}
+
+.petal-field__hero-item.hero-06 {
+  animation-name: hero-06, hero-fade;
+}
+
+.petal-field__hero-item.hero-07 {
+  animation-name: hero-07, hero-fade;
+}
+
+.petal-field__hero-item.hero-08 {
+  animation-name: hero-08, hero-fade;
+}
+
+.petal-field__hero-item.hero-09 {
+  animation-name: hero-09, hero-fade;
+}
+
+.petal-field__hero-item.hero-10 {
+  animation-name: hero-10, hero-fade;
+}
+
+.petal-field__hero-item.hero-11 {
+  animation-name: hero-11, hero-fade;
+}
+
+.petal-field__hero-item.hero-12 {
+  animation-name: hero-12, hero-fade;
+}
+/* 花瓣在玫瑰还半透明时不应该是糊在玫瑰后面的暗块，
+   所以让它们从 1.0s 起才淡入，与玫瑰淡出同步。 */
+@keyframes hero-fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

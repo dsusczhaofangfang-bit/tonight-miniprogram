@@ -1,0 +1,28 @@
+<view class="petal-field {{paused ? 'is-paused' : ''}}" aria-hidden="true">
+  <view class="petal-field__ambient">
+    <view
+      wx:for="{{ambient}}"
+      wx:key="id"
+      class="petal-field__amb {{item.cls}}"
+      style="{{item.style}}"
+    >
+      <image class="petal-field__amb-img" src="{{item.image}}" mode="aspectFit"></image>
+    </view>
+  </view>
+
+  <view class="petal-field__hero">
+    <view
+      wx:for="{{hero}}"
+      wx:key="id"
+      class="petal-field__hero-item {{item.cls}}"
+      style="{{item.style}}"
+    >
+      <image
+        class="petal-field__hero-img {{item.mirror ? 'petal-field__hero-img--mirror' : ''}}"
+        src="{{item.image}}"
+        mode="aspectFit"
+        style="{{item.imgStyle}}"
+      ></image>
+    </view>
+  </view>
+</view>

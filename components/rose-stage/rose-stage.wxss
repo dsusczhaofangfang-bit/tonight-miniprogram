@@ -1,0 +1,83 @@
+/* 玫瑰本体。压在花瓣之上（z-index 3），淡出时花瓣从它体内穿出，
+   这是"玫瑰解体为花瓣"连贯性的关键，不要调换层级。 */
+.rose {
+  position: absolute;
+  left: 50%;
+  z-index: 3;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.rose__dissolve {
+  position: relative;
+  animation-name: rose-dissolve;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+}
+
+/* 轮廓光：实测素材光源在画面上方（上象限亮度 29.9 / 下象限 17.6），
+   所以光晕偏上，不做居中均匀发光。 */
+.rose__halo {
+  position: absolute;
+  top: -18%;
+  right: -24%;
+  bottom: -20%;
+  left: -24%;
+  z-index: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    rgba(163, 43, 65, 0.34) 0%,
+    rgba(163, 43, 65, 0.14) 40%,
+    rgba(163, 43, 65, 0) 72%
+  );
+  animation: rose-halo 1.4s ease-out both;
+}
+
+.rose__appear {
+  position: relative;
+  z-index: 1;
+  animation: rose-appear 700ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.rose__img {
+  display: block;
+  width: 100%;
+}
+
+@keyframes rose-appear {
+  0% {
+    opacity: 0;
+    transform: scale(1.06) translate3d(0, 12rpx, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+}
+
+@keyframes rose-halo {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0.82;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes rose-dissolve {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

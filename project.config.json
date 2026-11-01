@@ -1,13 +1,49 @@
 {
   "description": "柠舍唔同 · COCKTAIL & WHISKEY BAR 小程序",
   "packOptions": {
-    "ignore": [],
-    "include": [
+    "ignore": [
+      {
+        "type": "folder",
+        "value": "docs"
+      },
+      {
+        "type": "folder",
+        "value": "scripts"
+      },
+      {
+        "type": "folder",
+        "value": "assets/_src"
+      },
+      {
+        "type": "file",
+        "value": "README.md"
+      },
       {
         "type": "folder",
         "value": "assets/petals"
+      },
+      {
+        "type": "folder",
+        "value": "assets/rose"
+      },
+      {
+        "type": "folder",
+        "value": "components/rose-stage"
+      },
+      {
+        "type": "folder",
+        "value": "components/petal-field"
+      },
+      {
+        "type": "folder",
+        "value": "components/petal-layer"
+      },
+      {
+        "type": "folder",
+        "value": "HakkouMincho-v1.004"
       }
-    ]
+    ],
+    "include": []
   },
   "setting": {
     "urlCheck": true,

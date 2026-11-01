@@ -1,7 +1,6 @@
 {
   "navigationStyle": "custom",
   "navigationBarTitleText": "柠舍唔同",
-  "usingComponents": {
-    "petal-layer": "/components/petal-layer/petal-layer"
-  }
+  "disableScroll": true,
+  "usingComponents": {}
 }
