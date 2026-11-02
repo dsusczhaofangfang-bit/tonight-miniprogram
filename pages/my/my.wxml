@@ -9,9 +9,18 @@
   </view>
 
   <view class="card entry-group">
+    <view class="entry-item" bindtap="onOrdersTap">
+      <text class="entry-label">我的订单</text>
+      <text class="entry-value">查看</text>
+    </view>
     <view class="entry-item" bindtap="onAdminTap">
-      <text class="entry-label">管理后台</text>
-      <text class="entry-value">M3 开放</text>
+      <text class="entry-label">老板管理后台</text>
+      <text class="entry-value entry-owner" wx:if="{{isOwner}}">{{ownerText}}</text>
+      <text class="entry-value" wx:else>需口令</text>
+    </view>
+    <view class="entry-item" wx:if="{{isOwner}}" bindtap="onLogout">
+      <text class="entry-label">退出管理后台</text>
+      <text class="entry-value">退出</text>
     </view>
     <view class="entry-item" bindtap="onAboutTap">
       <text class="entry-label">关于柠舍唔同</text>

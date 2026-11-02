@@ -1,0 +1,73 @@
+<view class="admin-page">
+  <view class="admin-top">
+    <view class="admin-top-main">
+      <text class="admin-brand">柠舍唔同</text>
+      <text class="admin-sub">老板管理 · 演示数据</text>
+    </view>
+    <view class="admin-top-actions">
+      <text class="admin-top-link" bindtap="onBackToCustomer">顾客端</text>
+      <text class="admin-top-link" bindtap="onLogout">退出</text>
+    </view>
+  </view>
+
+  <view class="admin-body">
+    <scroll-view class="chip-scroll" scroll-x="true" show-scrollbar="{{false}}">
+      <view class="chip-bar">
+        <view
+          class="chip {{activeStatus === item.value ? 'is-active' : ''}}"
+          wx:for="{{filters}}"
+          wx:key="text"
+          data-status="{{item.value}}"
+          bindtap="onFilterTap"
+        >
+          <text>{{item.text}}</text>
+          <text class="chip-count">{{item.count}}</text>
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class="ao-summary">
+      <text class="ao-summary-title">{{activeText}}</text>
+      <text class="ao-summary-note" wx:if="{{!loading}}">共 {{total}} 笔 · 待处理异常 {{counts.openExceptions}} 笔</text>
+    </view>
+
+    <view class="admin-list" wx:if="{{orders.length}}">
+      <view
+        class="ao-card"
+        wx:for="{{orders}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="onOrderTap"
+        hover-class="admin-row--pressed"
+      >
+        <view class="ao-head">
+          <text class="ao-no">{{item.orderNo}}</text>
+          <status-tag status="{{item.status}}"></status-tag>
+        </view>
+
+        <view class="ao-body">
+          <view class="ao-table-row">
+            <text class="ao-table">{{item.tableText}}</text>
+            <text class="ao-time">{{item.timeText}}</text>
+          </view>
+          <text class="ao-items">{{item.summary}}</text>
+          <view class="ao-foot">
+            <text class="ao-qty">{{item.totalQty}} 件</text>
+            <text class="ao-amount admin-money"><text class="admin-money-unit">¥</text>{{item.amountText}}</text>
+          </view>
+          <text class="ao-exception" wx:if="{{item.hasException}}">异常待处理 · {{item.exceptionReason}}</text>
+        </view>
+      </view>
+    </view>
+
+    <empty-state
+      wx:elif="{{!loading}}"
+      text="{{activeStatus ? '该状态下暂无订单' : '暂无订单'}}"
+      hint="顾客下单后会出现在这里"
+    ></empty-state>
+
+    <view class="admin-note" wx:if="{{loading}}">正在读取订单…</view>
+  </view>
+
+  <admin-nav active="orders"></admin-nav>
+</view>

@@ -13,11 +13,74 @@ Page({
   data: {
     version: config.version,
     checks: [],
-    running: false
+    running: false,
+    // 调试用桌号：没有真实二维码时替代扫码，仅开发版可见
+    tableOptions: [],
+    tableIndex: 0,
+    tableName: '',
+    tableArea: '',
+    // 老板管理后台（演示鉴权）状态，仅作调试入口提示
+    ownerText: ''
   },
 
   onLoad() {
     this.runChecks();
+    this.loadTables();
+  },
+
+  // 从管理端返回时同步会话显示
+  onShow() {
+    const session = authService.getSessionSync();
+    this.setData({
+      ownerText: session ? `${session.roleText || '管理员'} · 已登录（演示）` : '未登录'
+    });
+  },
+
+  onAdminLogin() {
+    wx.navigateTo({ url: '/pages/admin-login/admin-login' });
+  },
+
+  loadTables() {
+    const app = getApp();
+    const current = (app && app.globalData && app.globalData.table) || null;
+
+    tableService.listTables().then((res) => {
+      const tables = res.code === 0 ? res.data : [];
+      const options = [{ id: '', label: '清除当前桌号' }].concat(
+        tables.map((item) => ({ id: item.id, label: `${item.name} · ${item.area}` }))
+      );
+      const found = current ? options.findIndex((item) => item.id === current.id) : -1;
+
+      this.setData({
+        tableOptions: options,
+        tableIndex: found > 0 ? found : 0,
+        tableName: current ? current.name : '',
+        tableArea: current ? current.area : ''
+      });
+    });
+  },
+
+  // 只写入配置里启用中的桌号，走 app.setTable，和扫码路径同一条校验
+  onTablePick(event) {
+    const index = Number(event.detail.value);
+    const option = this.data.tableOptions[index];
+    if (!option) return;
+
+    const app = getApp();
+
+    if (!option.id) {
+      app.clearTable();
+      wx.showToast({ title: '已清除桌号', icon: 'none' });
+    } else {
+      const table = app.setTable(option.id);
+      if (!table) {
+        wx.showToast({ title: '桌号不可用', icon: 'none' });
+        return;
+      }
+      wx.showToast({ title: `已设为 ${table.name}`, icon: 'none' });
+    }
+
+    this.loadTables();
   },
 
   runChecks() {
@@ -58,7 +121,7 @@ Page({
       {
         name: '管理员会话',
         run: () => authService.getSession(),
-        format: (data) => (data ? '已登录（演示）' : '未登录（正常）')
+        format: (data) => (data ? `${data.roleText || '管理员'} · 演示鉴权` : '未登录（正常）')
       },
       {
         name: 'Mock 开关',
@@ -99,13 +162,18 @@ Page({
         [
           STORAGE_KEYS.CART,
           STORAGE_KEYS.ORDERS,
+          STORAGE_KEYS.ORDER_SEQ,
           STORAGE_KEYS.PRODUCTS,
           STORAGE_KEYS.CATEGORIES,
           STORAGE_KEYS.TABLES,
+          STORAGE_KEYS.SEED_PRODUCTS,
+          STORAGE_KEYS.SEED_CATEGORIES,
+          STORAGE_KEYS.SEED_TABLES,
           STORAGE_KEYS.ADMIN_SESSION
         ].forEach((key) => storage.remove(key));
         wx.showToast({ title: '已重置', icon: 'success' });
         this.runChecks();
+        this.loadTables();
       }
     });
   }

@@ -1,0 +1,161 @@
+@import "../../styles/admin.wxss";
+
+.ov-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid rgba(201, 168, 110, 0.25);
+}
+
+.ov-title {
+  color: #F4ECDF;
+  font-size: 34rpx;
+  letter-spacing: 6rpx;
+}
+
+.ov-date {
+  color: #A08F7E;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 22rpx;
+  letter-spacing: 2rpx;
+}
+
+/* 2×2 指标格：用细线分隔，不做卡片投影 */
+.ov-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 8rpx;
+}
+
+.ov-cell {
+  width: 50%;
+  padding: 26rpx 0 22rpx;
+  border-bottom: 1rpx solid rgba(201, 168, 110, 0.14);
+}
+
+.ov-cell:nth-child(odd) {
+  padding-right: 20rpx;
+}
+
+.ov-cell:nth-child(even) {
+  padding-left: 20rpx;
+  border-left: 1rpx solid rgba(201, 168, 110, 0.14);
+}
+
+.ov-num {
+  display: block;
+  color: #F4ECDF;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 56rpx;
+  line-height: 1.1;
+  letter-spacing: 2rpx;
+}
+
+.ov-num--money {
+  color: #D9A45B;
+  font-size: 44rpx;
+}
+
+.ov-label {
+  display: block;
+  margin-top: 10rpx;
+  color: #C9A86E;
+  font-size: 23rpx;
+  letter-spacing: 3rpx;
+}
+
+.ov-extra {
+  display: block;
+  margin-top: 6rpx;
+  color: rgba(160, 143, 126, 0.75);
+  font-size: 19rpx;
+  letter-spacing: 1rpx;
+}
+
+.ov-alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24rpx;
+  padding: 18rpx 20rpx;
+  border-left: 4rpx solid #A32B41;
+  background: rgba(163, 43, 65, 0.12);
+}
+
+.ov-alert-text {
+  color: #D9A45B;
+  font-size: 22rpx;
+  letter-spacing: 1rpx;
+}
+
+.ov-alert-link {
+  color: #C9A86E;
+  font-size: 22rpx;
+  letter-spacing: 2rpx;
+}
+
+.ov-actions {
+  display: flex;
+  margin-top: 30rpx;
+}
+
+.ov-actions .admin-btn {
+  flex: 1;
+}
+
+.ov-actions .admin-btn + .admin-btn {
+  margin-left: 20rpx;
+}
+
+.ov-order {
+  padding: 22rpx 0;
+  border-bottom: 1rpx solid rgba(201, 168, 110, 0.14);
+}
+
+.ov-order-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ov-order-no {
+  color: #F4ECDF;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 26rpx;
+  letter-spacing: 2rpx;
+}
+
+.ov-order-meta {
+  display: flex;
+  align-items: baseline;
+  margin-top: 10rpx;
+  color: #A08F7E;
+  font-size: 21rpx;
+}
+
+.ov-order-table {
+  color: #C9A86E;
+  font-size: 22rpx;
+  letter-spacing: 1rpx;
+}
+
+.ov-order-dot {
+  margin: 0 8rpx;
+}
+
+.ov-order-time {
+  flex: 1;
+}
+
+.ov-order-amount {
+  font-size: 26rpx;
+}
+
+.ov-order-exception {
+  display: block;
+  margin-top: 8rpx;
+  color: #D08A93;
+  font-size: 20rpx;
+  letter-spacing: 1rpx;
+}

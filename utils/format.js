@@ -32,9 +32,28 @@ function isToday(timestamp) {
   return dateKey(timestamp) === dateKey();
 }
 
+// 表单里的「元」→ 整数分：只接受非负、最多两位小数，非法返回 null。
+// 用字符串拼整数，避免 parseFloat('58.05') * 100 = 5804.999… 这类浮点误差。
+function yuanToFen(input) {
+  const raw = String(input === undefined || input === null ? '' : input).trim();
+  const match = /^(\d{1,7})(?:\.(\d{1,2}))?$/.exec(raw);
+  if (!match) return null;
+  const yuan = parseInt(match[1], 10) * 100;
+  const fen = match[2] ? parseInt(match[2].padEnd(2, '0'), 10) : 0;
+  return yuan + fen;
+}
+
+// 分 → 元（表单回填用，固定两位小数）
+function fenToYuanInput(fen) {
+  const value = Number(fen);
+  return (Number.isFinite(value) ? value / 100 : 0).toFixed(2);
+}
+
 module.exports = {
   pad2,
   fenToYuan,
+  fenToYuanInput,
+  yuanToFen,
   dateKey,
   formatDate,
   formatTime,

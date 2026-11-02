@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "商品详情",
+  "navigationBarBackgroundColor": "#0B0A09",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "quantity-stepper": "/components/quantity-stepper/quantity-stepper",
+    "empty-state": "/components/empty-state/empty-state"
+  }
+}

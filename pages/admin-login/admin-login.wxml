@@ -1,0 +1,49 @@
+<view class="login-page">
+  <view class="login-head">
+    <text class="login-brand">柠舍唔同</text>
+    <text class="login-sub">COCKTAIL &amp; WHISKEY BAR</text>
+  </view>
+
+  <view class="login-card">
+    <view class="login-title-row">
+      <text class="login-title">老板管理后台</text>
+      <text class="demo-tag">演示鉴权</text>
+    </view>
+
+    <text class="login-desc">请输入管理口令进入后台。仅店主可见经营数据与商品管理。</text>
+
+    <view class="login-field">
+      <text class="login-label">管理口令</text>
+      <input
+        class="login-input"
+        type="text"
+        password="{{true}}"
+        maxlength="8"
+        value="{{password}}"
+        placeholder="请输入口令"
+        placeholder-class="login-placeholder"
+        confirm-type="done"
+        bindinput="onPasswordInput"
+        bindconfirm="onSubmit"
+      />
+    </view>
+
+    <view class="login-error" wx:if="{{error}}">{{error}}</view>
+
+    <view class="login-btn {{submitting ? 'login-btn--disabled' : ''}}" bindtap="onSubmit">
+      <text>{{submitting ? '登录中…' : '进入后台'}}</text>
+    </view>
+
+    <text class="login-hint">演示口令：{{demoPassword}}（仅演示环境使用）</text>
+
+    <view class="login-note">
+      <text class="login-note-line">Mock 权限说明</text>
+      <text class="login-note-text">
+        当前为本地模拟鉴权，口令写在客户端，仅用于演示流程。
+        正式版必须由云函数校验管理员身份（openid 白名单），前端隐藏入口不构成安全边界。
+      </text>
+    </view>
+  </view>
+
+  <text class="login-back" bindtap="onBack">返回顾客端</text>
+</view>

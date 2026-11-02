@@ -89,7 +89,24 @@
   "appid": "wx8f99126fa28c0b99",
   "projectname": "ningshe-budong",
   "miniprogramRoot": "./",
-  "condition": {},
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "扫码进入 · 桌号 A1（订单测试用）",
+          "pathName": "pages/welcome/welcome",
+          "query": "table=t_a1",
+          "scene": null
+        },
+        {
+          "name": "扫码进入 · 桌号 B2",
+          "pathName": "pages/welcome/welcome",
+          "query": "table=t_b2",
+          "scene": null
+        }
+      ]
+    }
+  },
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2

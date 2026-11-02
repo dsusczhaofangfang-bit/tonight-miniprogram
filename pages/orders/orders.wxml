@@ -1,0 +1,64 @@
+<view class="orders">
+  <view class="orders-head">
+    <text class="orders-title">我的订单</text>
+    <text class="orders-note">演示数据 · {{activeText}} {{total}} 笔</text>
+  </view>
+
+  <scroll-view class="filter-bar" scroll-x="true" show-scrollbar="{{false}}">
+    <view
+      class="filter-item {{item.value === activeStatus ? 'is-active' : ''}}"
+      wx:for="{{filters}}"
+      wx:key="value"
+      data-status="{{item.value}}"
+      bindtap="onFilterTap"
+    >{{item.text}}</view>
+  </scroll-view>
+
+  <block wx:if="{{loading}}">
+    <view class="sk-card" wx:for="{{[1, 2]}}" wx:key="*this">
+      <view class="sk-line sk-line--wide"></view>
+      <view class="sk-line"></view>
+      <view class="sk-line sk-line--short"></view>
+    </view>
+  </block>
+
+  <block wx:elif="{{orders.length}}">
+    <view
+      class="order-card"
+      wx:for="{{orders}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onOrderTap"
+      hover-class="order-card--pressed"
+    >
+      <view class="card-top">
+        <text class="card-no">{{item.orderNo}}</text>
+        <status-tag status="{{item.status}}"></status-tag>
+      </view>
+
+      <view class="card-meta">
+        <text>{{item.tableText}}</text>
+        <text>{{item.timeText}}</text>
+      </view>
+
+      <text class="card-summary">{{item.summary}}</text>
+
+      <view class="card-foot">
+        <text class="card-qty">共 {{item.totalQty}} 件</text>
+        <text class="card-amount">¥{{item.amountText}}</text>
+      </view>
+    </view>
+
+    <view class="orders-foot">演示数据 · 订单只保存在本机</view>
+  </block>
+
+  <block wx:else>
+    <empty-state
+      text="暂无{{activeText}}的订单"
+      hint="从酒单挑一杯，下单后订单会出现在这里"
+    ></empty-state>
+    <view class="orders-action">
+      <view class="ghost-btn" hover-class="ghost-btn--pressed" bindtap="onGoMenu">去酒单</view>
+    </view>
+  </block>
+</view>

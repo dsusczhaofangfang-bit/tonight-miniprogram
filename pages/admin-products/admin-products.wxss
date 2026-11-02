@@ -1,0 +1,142 @@
+@import "../../styles/admin.wxss";
+
+.ap-tools {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0 10rpx;
+}
+
+.ap-search {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  height: 72rpx;
+  padding: 0 18rpx;
+  border: 1rpx solid rgba(201, 168, 110, 0.22);
+  border-radius: 4rpx;
+}
+
+.ap-search-input {
+  flex: 1;
+  height: 72rpx;
+  color: #F4ECDF;
+  font-size: 25rpx;
+}
+
+.ap-search-clear {
+  padding-left: 16rpx;
+  color: #C9A86E;
+  font-size: 21rpx;
+}
+
+.ap-add {
+  flex: none;
+  width: 132rpx;
+  height: 72rpx;
+  margin-left: 16rpx;
+  border: 1rpx solid rgba(217, 164, 91, 0.55);
+  border-radius: 4rpx;
+  color: #D9A45B;
+  font-size: 24rpx;
+  line-height: 72rpx;
+  text-align: center;
+  letter-spacing: 4rpx;
+  text-indent: 4rpx;
+}
+
+.ap-counts {
+  padding: 12rpx 0 4rpx;
+  color: rgba(160, 143, 126, 0.8);
+  font-size: 20rpx;
+  letter-spacing: 1rpx;
+}
+
+.ap-row {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid rgba(201, 168, 110, 0.14);
+}
+
+.ap-img {
+  flex: none;
+  width: 96rpx;
+  height: 124rpx;
+  margin-right: 20rpx;
+  background: #241610;
+}
+
+.ap-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.ap-name-row {
+  display: flex;
+  align-items: center;
+}
+
+.ap-name {
+  overflow: hidden;
+  color: #F4ECDF;
+  font-size: 27rpx;
+  letter-spacing: 1rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ap-off {
+  flex: none;
+  margin-left: 12rpx;
+  padding: 2rpx 10rpx;
+  border: 1rpx solid rgba(160, 143, 126, 0.5);
+  border-radius: 2rpx;
+  color: #A08F7E;
+  font-size: 18rpx;
+  letter-spacing: 1rpx;
+}
+
+.ap-en {
+  display: block;
+  overflow: hidden;
+  margin-top: 4rpx;
+  color: #A08F7E;
+  font-size: 18rpx;
+  letter-spacing: 1rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ap-meta {
+  display: block;
+  margin-top: 10rpx;
+  color: #C9A86E;
+  font-size: 21rpx;
+  letter-spacing: 1rpx;
+}
+
+.ap-price {
+  margin-left: 10rpx;
+  font-size: 26rpx;
+}
+
+.ap-side {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 104rpx;
+  padding-left: 10rpx;
+}
+
+.ap-switch {
+  transform: scale(0.78);
+}
+
+.ap-loading {
+  padding: 60rpx 0;
+  color: #A08F7E;
+  font-size: 22rpx;
+  text-align: center;
+  letter-spacing: 2rpx;
+}

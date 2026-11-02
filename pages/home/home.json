@@ -1,4 +1,8 @@
 {
+  "navigationStyle": "custom",
   "navigationBarTitleText": "柠舍唔同",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#0B0A09",
+  "backgroundTextStyle": "dark",
   "usingComponents": {}
 }

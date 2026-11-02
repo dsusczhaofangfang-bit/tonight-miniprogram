@@ -1,42 +1,111 @@
-<view class="page home-page">
-  <view class="hero">
-    <text class="hero-eyebrow">COCKTAIL &amp; WHISKEY BAR</text>
-    <text class="hero-title">柠舍唔同</text>
-    <view class="hero-rule"></view>
-    <text class="hero-slogan">{{shop.slogan || '今夜，来点不一样的。'}}</text>
-
-    <view class="hero-actions">
-      <button class="btn btn-primary hero-btn" bindtap="onStartOrder">开始点单</button>
-      <text class="hero-link" bindtap="onViewMenu">先看看酒单 →</text>
+<view class="home">
+  <view class="topbar" style="padding-top: {{topInset}}px;">
+    <view class="brand">
+      <text class="brand-cn">柠舍唔同</text>
+      <text class="brand-en">COCKTAIL &amp; WHISKEY BAR</text>
     </view>
   </view>
 
-  <view class="card shop-card" wx:if="{{shop}}">
-    <view class="shop-head">
-      <text class="shop-title">到店信息</text>
-      <text class="demo-tag">示例信息</text>
+  <!-- 放在胶囊下方，避免与微信原生「关闭/退出」按钮重叠 -->
+  <view
+    class="profile-entry"
+    style="top: {{profileTop}}px;"
+    hover-class="profile-entry--pressed"
+    bindtap="onProfileTap"
+  >我的</view>
+
+  <view class="rule"></view>
+
+  <text class="intro" wx:if="{{intro}}">{{intro}}</text>
+
+  <view class="table-row" wx:if="{{table}}">
+    <text class="table-label">当前桌号</text>
+    <text class="table-name">{{table.name}}</text>
+    <text class="table-area">{{table.area}}</text>
+  </view>
+
+  <button class="start-btn" hover-class="start-btn--pressed" bindtap="onStartOrder">开始点单</button>
+
+  <view class="section">
+    <view class="section-head">
+      <text class="section-title">酒单分类</text>
+      <text class="section-note">共 {{totalCount}} 款</text>
     </view>
 
-    <view class="shop-row">
-      <text class="shop-label">地址</text>
-      <text class="shop-value">{{shop.address}}</text>
-    </view>
-    <view class="shop-row">
-      <text class="shop-label">营业</text>
-      <text class="shop-value">{{shop.hours}}</text>
-    </view>
-    <view class="shop-row">
-      <text class="shop-label">电话</text>
-      <text class="shop-value">{{shop.phone}}</text>
-    </view>
-
-    <view class="shop-actions">
-      <view class="shop-action" bindtap="onMapTap">地图导航</view>
-      <view class="shop-action" bindtap="onCallTap">拨打电话</view>
+    <view class="category-grid" wx:if="{{categories.length}}">
+      <view
+        class="category-cell"
+        hover-class="category-cell--pressed"
+        wx:for="{{categories}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="onCategoryTap"
+      >
+        <text class="category-name">{{item.name}}</text>
+        <text class="category-en">{{item.nameEn}}</text>
+      </view>
     </view>
   </view>
 
-  <view class="home-footer">
-    <text>演示版本 v{{version}} · 示例数据，待替换</text>
+  <view class="section">
+    <view class="section-head">
+      <text class="section-title">今晚推荐</text>
+      <text class="section-note">示例数据</text>
+    </view>
+
+    <view class="featured-list" wx:if="{{featured.length}}">
+      <view
+        class="featured"
+        hover-class="featured--pressed"
+        wx:for="{{featured}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="onProductTap"
+      >
+        <view class="label-block">
+          <text class="label-name">{{item.categoryName}}</text>
+          <text class="label-demo">示例图</text>
+        </view>
+
+        <view class="featured-body">
+          <text class="featured-name">{{item.name}}</text>
+          <text class="featured-en">{{item.nameEn}}</text>
+          <text class="featured-desc">{{item.description}}</text>
+          <view class="featured-foot">
+            <view class="price"><text class="price-yen">¥</text>{{item.priceText}}</view>
+            <view class="add" hover-class="add--pressed" data-id="{{item.id}}" catchtap="onAdd">加入</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <text class="tip" wx:if="{{loading}}">正在取酒单…</text>
+    <text class="tip" wx:if="{{!loading && !featured.length}}">今晚暂无推荐，去酒单看看全部。</text>
+  </view>
+
+  <view class="section" wx:if="{{seasonal.length}}">
+    <view class="section-head">
+      <text class="section-title">当季推荐</text>
+      <text class="section-note">{{season}}</text>
+    </view>
+
+    <view
+      class="seasonal"
+      hover-class="seasonal--pressed"
+      wx:for="{{seasonal}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onProductTap"
+    >
+      <view class="seasonal-head">
+        <text class="seasonal-name">{{item.name}}</text>
+        <text class="seasonal-price">¥{{item.priceText}}</text>
+      </view>
+      <text class="seasonal-note">{{item.note}}</text>
+    </view>
+  </view>
+
+  <view class="home-foot">
+    <text>演示版本 v{{version}} · 全部为示例数据</text>
   </view>
 </view>

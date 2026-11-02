@@ -1,0 +1,4 @@
+<view class="lb lb--{{size}}">
+  <text class="lb-cat">{{categoryName}}</text>
+  <text class="lb-demo" wx:if="{{demo}}">示例图</text>
+</view>

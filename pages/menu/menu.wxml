@@ -1,32 +1,94 @@
-<view class="page menu-page">
-  <view class="menu-head">
-    <text class="menu-title">酒单</text>
-    <text class="menu-sub">MENU · 示例数据</text>
+<view class="menu">
+  <view class="search-bar">
+    <input
+      class="search-input"
+      type="text"
+      value="{{keyword}}"
+      placeholder="搜索酒名"
+      placeholder-class="search-placeholder"
+      confirm-type="search"
+      bindinput="onKeywordInput"
+      bindconfirm="onSearchConfirm"
+    />
+    <text class="search-clear" wx:if="{{keyword}}" bindtap="onClearKeyword">清除</text>
   </view>
 
-  <scroll-view class="category-bar" scroll-x enhanced show-scrollbar="{{false}}">
-    <view
-      class="category-item {{item.id === activeId ? 'is-active' : ''}}"
-      wx:for="{{categories}}"
-      wx:key="id"
-      data-id="{{item.id}}"
-      bindtap="onCategoryTap"
-    >
-      {{item.name}}
+  <view class="menu-body">
+    <view class="rail">
+      <view class="rail-item {{activeId === '' ? 'is-active' : ''}}" data-id="" bindtap="onCategoryTap">
+        <text class="rail-name">全部</text>
+      </view>
+      <view
+        class="rail-item {{item.id === activeId ? 'is-active' : ''}}"
+        wx:for="{{categories}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="onCategoryTap"
+      >
+        <text class="rail-name">{{item.name}}</text>
+      </view>
     </view>
-  </scroll-view>
 
-  <view class="product-grid" wx:if="{{products.length}}">
-    <view class="product-cell" wx:for="{{products}}" wx:key="id">
-      <product-card
-        product="{{item}}"
-        bind:select="onProductTap"
-        bind:add="onAdd"
-      ></product-card>
+    <view class="list">
+      <view class="list-head">
+        <text class="list-title">{{activeName}}</text>
+        <text class="list-note" wx:if="{{!loading}}">{{keyword ? '搜索到 ' + products.length + ' 款' : '共 ' + products.length + ' 款'}}</text>
+      </view>
+
+      <block wx:if="{{loading}}">
+        <view class="item item--skeleton" wx:for="{{[1, 2, 3]}}" wx:key="*this">
+          <view class="label-block label-block--empty"></view>
+          <view class="item-body">
+            <view class="sk-line sk-line--wide"></view>
+            <view class="sk-line"></view>
+            <view class="sk-line sk-line--short"></view>
+          </view>
+        </view>
+      </block>
+
+      <block wx:elif="{{products.length}}">
+        <view
+          class="item"
+          wx:for="{{products}}"
+          wx:key="id"
+          data-id="{{item.id}}"
+          bindtap="onProductTap"
+          hover-class="item--pressed"
+        >
+          <image
+            wx:if="{{item.image}}"
+            class="item-img"
+            src="{{item.image}}"
+            mode="aspectFill"
+            data-index="{{index}}"
+            binderror="onImageError"
+          />
+          <view wx:else class="label-block">
+            <text class="label-cat">{{item.categoryName}}</text>
+            <text class="label-demo">示例图</text>
+          </view>
+
+          <view class="item-body">
+            <text class="item-name">{{item.name}}</text>
+            <text class="item-en">{{item.nameEn}}</text>
+            <text class="item-desc">{{item.description}}</text>
+
+            <view class="item-foot">
+              <view class="item-price"><text class="yen">¥</text>{{item.priceText}}</view>
+              <view class="item-actions">
+                <text class="item-detail" data-id="{{item.id}}" catchtap="onProductTap">详情</text>
+                <view class="item-add" data-id="{{item.id}}" catchtap="onAdd" hover-class="item-add--pressed">加入</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+
+      <empty-state
+        wx:else
+        text="{{keyword ? '没有找到相关酒品' : '该分类暂无在售商品'}}"
+        hint="{{keyword ? '换个关键词，或点「全部」看看' : '可切换其他分类看看'}}"
+      ></empty-state>
     </view>
   </view>
-
-  <empty-state wx:if="{{!loading && !products.length}}" text="该分类暂无在售商品" hint="可切换其他分类看看"></empty-state>
-
-  <view class="loading-tip" wx:if="{{loading}}">加载中…</view>
 </view>

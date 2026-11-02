@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "我的订单",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "empty-state": "/components/empty-state/empty-state",
+    "status-tag": "/components/status-tag/status-tag"
+  }
+}

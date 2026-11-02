@@ -1,0 +1,89 @@
+<view class="admin-page">
+  <view class="admin-top">
+    <view class="admin-top-main">
+      <text class="admin-brand">柠舍唔同</text>
+      <text class="admin-sub">老板管理 · 演示数据</text>
+    </view>
+    <view class="admin-top-actions">
+      <text class="admin-top-link" bindtap="onBackToCustomer">顾客端</text>
+      <text class="admin-top-link" bindtap="onLogout">退出</text>
+    </view>
+  </view>
+
+  <view class="admin-body">
+    <view class="ap-tools">
+      <view class="ap-search">
+        <input
+          class="ap-search-input"
+          value="{{keyword}}"
+          placeholder="搜索商品名称"
+          placeholder-class="admin-input-placeholder"
+          confirm-type="search"
+          bindinput="onKeywordInput"
+          bindconfirm="onSearchConfirm"
+        />
+        <text class="ap-search-clear" wx:if="{{keyword}}" bindtap="onClearKeyword">清除</text>
+      </view>
+      <view class="ap-add" bindtap="onAdd" hover-class="admin-btn--pressed">新增</view>
+    </view>
+
+    <scroll-view class="chip-scroll" scroll-x="true" show-scrollbar="{{false}}">
+      <view class="chip-bar">
+        <view
+          class="chip {{activeCategory === item.id ? 'is-active' : ''}}"
+          wx:for="{{categories}}"
+          wx:key="id"
+          data-id="{{item.id}}"
+          bindtap="onCategoryTap"
+        >{{item.name}}</view>
+      </view>
+    </scroll-view>
+
+    <text class="ap-counts">共 {{counts.total}} 款 · 在售 {{counts.onSale}} · 已下架 {{counts.offSale}}</text>
+
+    <view class="admin-list" wx:if="{{products.length}}">
+      <view
+        class="ap-row"
+        wx:for="{{products}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="onProductTap"
+        hover-class="admin-row--pressed"
+      >
+        <image wx:if="{{item.image}}" class="ap-img" src="{{item.image}}" mode="aspectFill" />
+        <label-block wx:else category-name="{{item.categoryName}}" size="sm"></label-block>
+
+        <view class="ap-main">
+          <view class="ap-name-row">
+            <text class="ap-name">{{item.name}}</text>
+            <text class="ap-off" wx:if="{{!item.isAvailable}}">已下架</text>
+          </view>
+          <text class="ap-en">{{item.nameEn}}</text>
+          <text class="ap-meta">{{item.categoryName}} · <text class="ap-price admin-money">¥{{item.priceText}}</text></text>
+        </view>
+
+        <view class="ap-side" catchtap="onSwitchTap">
+          <switch
+            class="ap-switch"
+            checked="{{item.isAvailable}}"
+            color="#D9A45B"
+            data-id="{{item.id}}"
+            bindchange="onToggle"
+          />
+        </view>
+      </view>
+    </view>
+
+    <empty-state
+      wx:elif="{{!loading}}"
+      text="{{keyword ? '没有找到商品' : '该分类暂无商品'}}"
+      hint="点「新增」添加一款示例商品"
+    ></empty-state>
+
+    <view class="ap-loading" wx:if="{{loading}}">正在读取商品…</view>
+
+    <text class="admin-note">商品与顾客端共用同一份本地数据；下架后酒单、详情、结算均不可购买，历史订单保留下单时的快照。</text>
+  </view>
+
+  <admin-nav active="products"></admin-nav>
+</view>

@@ -1,0 +1,309 @@
+.confirm {
+  min-height: 100vh;
+  padding: 40rpx 32rpx 260rpx;
+  background: #0B0A09;
+}
+
+.confirm-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.confirm-title {
+  color: #F4ECDF;
+  font-size: 44rpx;
+  letter-spacing: 6rpx;
+}
+
+.confirm-note {
+  color: rgba(160, 143, 126, 0.85);
+  font-size: 18rpx;
+  letter-spacing: 1rpx;
+}
+
+/* 桌号：有桌号时一行展示，缺失时整块转为警示，不自动生成任何桌号 */
+.table-card {
+  display: flex;
+  align-items: baseline;
+  margin-top: 24rpx;
+  padding: 20rpx 24rpx;
+  border: 1rpx solid rgba(201, 168, 110, 0.25);
+  background: #14100D;
+}
+
+.table-card.is-missing {
+  flex-direction: column;
+  align-items: flex-start;
+  border-color: rgba(163, 43, 65, 0.65);
+}
+
+.table-label {
+  color: #A08F7E;
+  font-size: 20rpx;
+  letter-spacing: 2rpx;
+}
+
+.table-name {
+  margin-left: 16rpx;
+  color: #F4ECDF;
+  font-size: 34rpx;
+  letter-spacing: 2rpx;
+}
+
+.table-area {
+  margin-left: 12rpx;
+  color: rgba(160, 143, 126, 0.8);
+  font-size: 20rpx;
+}
+
+.table-warning {
+  color: #D06A7C;
+  font-size: 28rpx;
+  letter-spacing: 2rpx;
+}
+
+.table-hint {
+  margin-top: 8rpx;
+  color: rgba(160, 143, 126, 0.85);
+  font-size: 20rpx;
+  line-height: 1.7;
+}
+
+.table-dev {
+  display: inline-block;
+  margin-top: 18rpx;
+  padding: 8rpx 20rpx;
+  border: 1rpx solid rgba(201, 168, 110, 0.4);
+  border-radius: 4rpx;
+  color: #D9A45B;
+  font-size: 20rpx;
+  letter-spacing: 1rpx;
+}
+
+.section {
+  margin-top: 36rpx;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 12rpx;
+  border-bottom: 1rpx solid rgba(201, 168, 110, 0.18);
+}
+
+.section-title {
+  color: #F4ECDF;
+  font-size: 26rpx;
+  letter-spacing: 3rpx;
+}
+
+.section-note {
+  color: rgba(160, 143, 126, 0.85);
+  font-size: 18rpx;
+}
+
+.line {
+  display: flex;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid rgba(201, 168, 110, 0.12);
+}
+
+.line-img {
+  flex: none;
+  width: 140rpx;
+  height: 140rpx;
+  background: #14100D;
+}
+
+/* 无真实商品图时的酒标式占位块，与酒单/详情保持一致 */
+.line-label {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 140rpx;
+  height: 140rpx;
+  border: 1rpx solid rgba(201, 168, 110, 0.25);
+  background: #14100D;
+}
+
+.line-label-cat {
+  color: #C9A86E;
+  font-size: 20rpx;
+  letter-spacing: 1rpx;
+}
+
+.line-label-demo {
+  margin-top: 6rpx;
+  color: rgba(160, 143, 126, 0.7);
+  font-size: 16rpx;
+}
+
+.line-body {
+  flex: 1;
+  padding-left: 20rpx;
+}
+
+.line-name {
+  color: #F4ECDF;
+  font-size: 28rpx;
+  letter-spacing: 1rpx;
+}
+
+.line-en {
+  margin-top: 4rpx;
+  color: #A08F7E;
+  font-size: 18rpx;
+}
+
+.line-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16rpx;
+}
+
+.line-price {
+  color: #D9A45B;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28rpx;
+}
+
+.line-sub {
+  margin-top: 8rpx;
+  color: rgba(160, 143, 126, 0.85);
+  font-size: 20rpx;
+}
+
+.remark {
+  width: 100%;
+  min-height: 140rpx;
+  margin-top: 16rpx;
+  padding: 0;
+  color: #F4ECDF;
+  font-size: 26rpx;
+  line-height: 1.7;
+  background: transparent;
+}
+
+.remark-placeholder {
+  color: rgba(160, 143, 126, 0.5);
+}
+
+.total-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 12rpx 0;
+}
+
+.total-label {
+  color: #A08F7E;
+  font-size: 22rpx;
+  letter-spacing: 2rpx;
+}
+
+.total-value {
+  color: #F4ECDF;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 26rpx;
+}
+
+.total-row--strong {
+  margin-top: 8rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid rgba(201, 168, 110, 0.18);
+}
+
+.total-amount {
+  color: #D9A45B;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 36rpx;
+}
+
+.submit-space {
+  height: 60rpx;
+}
+
+.loading {
+  padding: 200rpx 0;
+  color: #A08F7E;
+  font-size: 24rpx;
+  letter-spacing: 2rpx;
+  text-align: center;
+}
+
+.empty-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 24rpx;
+}
+
+.ghost-btn {
+  padding: 20rpx 56rpx;
+  border: 1rpx solid rgba(201, 168, 110, 0.45);
+  border-radius: 4rpx;
+  color: #C9A86E;
+  font-size: 26rpx;
+  letter-spacing: 4rpx;
+  text-indent: 4rpx;
+}
+
+.ghost-btn--pressed {
+  background: rgba(201, 168, 110, 0.12);
+}
+
+.submit-bar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18rpx 32rpx calc(22rpx + env(safe-area-inset-bottom));
+  border-top: 1rpx solid rgba(201, 168, 110, 0.25);
+  background: #14100D;
+}
+
+.submit-total {
+  display: flex;
+  align-items: baseline;
+}
+
+.submit-label {
+  color: #A08F7E;
+  font-size: 22rpx;
+  letter-spacing: 2rpx;
+}
+
+.submit-amount {
+  margin-left: 12rpx;
+  color: #D9A45B;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 36rpx;
+}
+
+.submit-btn {
+  padding: 18rpx 44rpx;
+  border: 1rpx solid rgba(201, 168, 110, 0.45);
+  border-radius: 4rpx;
+  background: #5A1A24;
+  color: #F4ECDF;
+  font-size: 26rpx;
+  letter-spacing: 4rpx;
+  text-indent: 4rpx;
+}
+
+.submit-btn--pressed {
+  opacity: 0.8;
+}
+
+.submit-btn.is-disabled {
+  border-color: rgba(160, 143, 126, 0.25);
+  background: #2A1D18;
+  color: rgba(244, 236, 223, 0.4);
+}

@@ -1,0 +1,144 @@
+.login-page {
+  min-height: 100vh;
+  padding: 96rpx 48rpx calc(60rpx + env(safe-area-inset-bottom));
+  background: #0B0A09;
+}
+
+.login-head {
+  padding-bottom: 32rpx;
+  border-bottom: 1rpx solid rgba(201, 168, 110, 0.25);
+}
+
+.login-brand {
+  display: block;
+  color: #F4ECDF;
+  font-size: 48rpx;
+  letter-spacing: 10rpx;
+}
+
+.login-sub {
+  display: block;
+  margin-top: 10rpx;
+  color: #A08F7E;
+  font-size: 20rpx;
+  letter-spacing: 3rpx;
+}
+
+.login-card {
+  padding-top: 40rpx;
+}
+
+.login-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.login-title {
+  color: #C9A86E;
+  font-size: 32rpx;
+  letter-spacing: 4rpx;
+}
+
+.login-desc {
+  display: block;
+  margin-top: 12rpx;
+  color: rgba(160, 143, 126, 0.9);
+  font-size: 22rpx;
+  line-height: 1.7;
+}
+
+.login-field {
+  margin-top: 36rpx;
+  padding-bottom: 14rpx;
+  border-bottom: 1rpx solid rgba(201, 168, 110, 0.25);
+}
+
+.login-label {
+  display: block;
+  color: #A08F7E;
+  font-size: 21rpx;
+  letter-spacing: 2rpx;
+}
+
+.login-input {
+  height: 88rpx;
+  color: #F4ECDF;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 40rpx;
+  letter-spacing: 10rpx;
+}
+
+.login-placeholder {
+  color: rgba(160, 143, 126, 0.45);
+  font-size: 26rpx;
+  letter-spacing: 2rpx;
+}
+
+.login-error {
+  margin-top: 16rpx;
+  padding: 12rpx 14rpx;
+  border-left: 4rpx solid #A32B41;
+  background: rgba(163, 43, 65, 0.1);
+  color: #D9A45B;
+  font-size: 22rpx;
+}
+
+.login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 92rpx;
+  margin-top: 36rpx;
+  border: 1rpx solid rgba(201, 168, 110, 0.45);
+  border-radius: 4rpx;
+  background: linear-gradient(135deg, #5A1A24, #7A2433);
+  color: #F4ECDF;
+  font-size: 30rpx;
+  letter-spacing: 6rpx;
+  text-indent: 6rpx;
+}
+
+.login-btn--disabled {
+  opacity: 0.6;
+}
+
+.login-hint {
+  display: block;
+  margin-top: 18rpx;
+  color: rgba(160, 143, 126, 0.85);
+  font-size: 21rpx;
+  text-align: center;
+  letter-spacing: 1rpx;
+}
+
+.login-note {
+  margin-top: 44rpx;
+  padding: 22rpx 24rpx;
+  border: 1rpx solid rgba(201, 168, 110, 0.16);
+  background: #17110D;
+}
+
+.login-note-line {
+  display: block;
+  color: #C9A86E;
+  font-size: 22rpx;
+  letter-spacing: 2rpx;
+}
+
+.login-note-text {
+  display: block;
+  margin-top: 10rpx;
+  color: rgba(160, 143, 126, 0.9);
+  font-size: 21rpx;
+  line-height: 1.75;
+}
+
+.login-back {
+  display: block;
+  margin-top: 40rpx;
+  color: #A08F7E;
+  font-size: 22rpx;
+  text-align: center;
+  letter-spacing: 2rpx;
+}

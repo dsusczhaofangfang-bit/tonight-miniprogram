@@ -1,0 +1,107 @@
+<view class="detail" wx:if="{{order}}">
+  <view class="d-head">
+    <view class="d-head-main">
+      <status-tag status="{{order.status}}"></status-tag>
+      <text class="d-state">{{statusText}}</text>
+    </view>
+    <text class="d-time">{{timeText}}</text>
+  </view>
+
+  <view class="d-card">
+    <view class="d-row">
+      <text class="d-label">订单编号</text>
+      <text class="d-value d-mono">{{order.orderNo}}</text>
+    </view>
+    <view class="d-row">
+      <text class="d-label">下单时间</text>
+      <text class="d-value">{{timeText}}</text>
+    </view>
+    <view class="d-row">
+      <text class="d-label">桌号</text>
+      <text class="d-value">{{order.tableName}}{{order.tableArea ? ' · ' + order.tableArea : ''}}</text>
+    </view>
+  </view>
+
+  <view class="d-section">
+    <view class="d-section-head">
+      <text class="d-section-title">商品清单</text>
+      <text class="d-section-note">共 {{order.totalQty}} 件</text>
+    </view>
+
+    <view class="d-item" wx:for="{{items}}" wx:key="productId">
+      <image wx:if="{{item.image}}" class="d-item-img" src="{{item.image}}" mode="aspectFill" />
+      <view wx:else class="d-item-label">
+        <text class="d-item-cat">{{item.categoryName}}</text>
+        <text class="d-item-demo">示例图</text>
+      </view>
+
+      <view class="d-item-main">
+        <text class="d-item-name">{{item.name}}</text>
+        <text class="d-item-en">{{item.nameEn}}</text>
+        <text class="d-item-price">¥{{item.priceText}} × {{item.qty}}</text>
+      </view>
+
+      <view class="d-item-side">
+        <text class="d-item-sub">¥{{item.subtotalText}}</text>
+      </view>
+    </view>
+
+    <view class="d-total">
+      <text class="d-total-label">订单总额</text>
+      <text class="d-total-value">¥{{totalText}}</text>
+    </view>
+  </view>
+
+  <view class="d-section">
+    <view class="d-section-head">
+      <text class="d-section-title">顾客备注</text>
+    </view>
+    <text class="d-remark" wx:if="{{order.remark}}">{{order.remark}}</text>
+    <text class="d-remark d-remark--empty" wx:else>无备注</text>
+  </view>
+
+  <view class="d-section">
+    <view class="d-section-head">
+      <text class="d-section-title">状态记录</text>
+    </view>
+    <view class="d-log" wx:for="{{logs}}" wx:key="key">
+      <view class="d-log-dot"></view>
+      <view class="d-log-body">
+        <text class="d-log-status">{{item.statusText}}</text>
+        <text class="d-log-time">{{item.timeText}} · {{item.actorText}}</text>
+        <text class="d-log-note" wx:if="{{item.note}}">{{item.note}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="d-demo" wx:if="{{demoMode}}">
+    演示阶段：状态流转与订单金额均在本机模拟，未接入真实店员操作与支付。
+  </view>
+
+  <view class="d-space"></view>
+</view>
+
+<view class="loading" wx:if="{{loading}}">加载中…</view>
+
+<empty-state
+  wx:if="{{!loading && !order}}"
+  text="{{error || '订单不存在'}}"
+  hint="返回订单列表看看"
+></empty-state>
+
+<view class="d-actions" wx:if="{{order}}">
+  <view class="action-ghost" hover-class="action-ghost--pressed" bindtap="onViewAll">我的订单</view>
+  <view class="action-ghost" hover-class="action-ghost--pressed" bindtap="onGoMenu">去酒单</view>
+  <view
+    wx:if="{{canCancel}}"
+    class="action-cancel"
+    hover-class="action-cancel--pressed"
+    bindtap="onCancel"
+  >取消订单</view>
+  <view
+    wx:if="{{demoMode && nextStatus}}"
+    class="action-demo"
+    hover-class="action-demo--pressed"
+    bindtap="onAdvance"
+  >模拟推进</view>
+</view>

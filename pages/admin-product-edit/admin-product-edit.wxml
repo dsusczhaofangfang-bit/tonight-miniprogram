@@ -1,0 +1,132 @@
+<view class="admin-page edit-page">
+  <view class="admin-body">
+    <view class="ed-head">
+      <text class="ed-title">{{mode === 'edit' ? '编辑商品' : '新增商品'}}</text>
+      <text class="demo-tag">演示数据</text>
+    </view>
+
+    <view class="ed-image">
+      <view class="ed-image-box">
+        <image
+          wx:if="{{imageUrl}}"
+          class="ed-image-img"
+          src="{{imageUrl}}"
+          mode="aspectFill"
+          binderror="onImageError"
+        />
+        <label-block wx:else category-name="{{categories[categoryIndex].name}}" size="md"></label-block>
+      </view>
+      <view class="ed-image-main">
+        <text class="ed-image-title">商品图片</text>
+        <text class="ed-image-hint">图片由系统维护人员统一更新，本页仅只读预览。</text>
+        <text class="ed-image-hint">暂无图片时使用酒标式占位块，不影响上架与顾客下单。</text>
+      </view>
+    </view>
+
+    <view class="ed-fields">
+      <view class="admin-field">
+        <view class="admin-field-head">
+          <text class="admin-label">商品名称 <text class="admin-required">*</text></text>
+          <text class="admin-label">{{form.name.length}}/30</text>
+        </view>
+        <input
+          class="admin-input"
+          value="{{form.name}}"
+          maxlength="30"
+          placeholder="例如：示例·特调饮品 07"
+          placeholder-class="admin-input-placeholder"
+          bindinput="onNameInput"
+        />
+      </view>
+
+      <view class="admin-field">
+        <view class="admin-field-head">
+          <text class="admin-label">英文名</text>
+          <text class="admin-label">{{form.nameEn.length}}/40</text>
+        </view>
+        <input
+          class="admin-input"
+          value="{{form.nameEn}}"
+          maxlength="40"
+          placeholder="选填，显示在名称下方"
+          placeholder-class="admin-input-placeholder"
+          bindinput="onNameEnInput"
+        />
+      </view>
+
+      <view class="admin-field">
+        <view class="admin-field-head">
+          <text class="admin-label">价格（元） <text class="admin-required">*</text></text>
+          <text class="admin-label">按整数分保存</text>
+        </view>
+        <view class="ed-price">
+          <text class="ed-price-unit">¥</text>
+          <input
+            class="admin-input admin-input--number"
+            type="digit"
+            value="{{form.priceYuan}}"
+            maxlength="10"
+            placeholder="0.00"
+            placeholder-class="admin-input-placeholder"
+            bindinput="onPriceInput"
+          />
+        </view>
+      </view>
+
+      <view class="admin-field">
+        <view class="admin-field-head">
+          <text class="admin-label">分类 <text class="admin-required">*</text></text>
+        </view>
+        <picker
+          mode="selector"
+          range="{{categories}}"
+          range-key="name"
+          value="{{categoryIndex}}"
+          bindchange="onCategoryChange"
+        >
+          <view class="admin-picker">
+            <text class="admin-picker-value">{{categories[categoryIndex].name || '请选择分类'}}</text>
+            <text class="admin-picker-hint">切换</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="admin-field">
+        <view class="admin-field-head">
+          <text class="admin-label">商品介绍</text>
+          <text class="admin-label">{{form.description.length}}/120</text>
+        </view>
+        <textarea
+          class="admin-textarea"
+          value="{{form.description}}"
+          maxlength="120"
+          placeholder="写清楚风味、基酒、饮用提示；示例数据请保留「示例·」前缀"
+          placeholder-class="admin-input-placeholder"
+          bindinput="onDescInput"
+        ></textarea>
+      </view>
+
+      <view class="admin-field ed-switch-row">
+        <view class="ed-switch-main">
+          <text class="admin-label">上架状态</text>
+          <text class="ed-switch-hint">{{form.isAvailable ? '顾客端可见，可加购与下单' : '顾客端不可见、不可加购；历史订单不受影响'}}</text>
+        </view>
+        <switch checked="{{form.isAvailable}}" color="#D9A45B" bindchange="onAvailableChange" />
+      </view>
+    </view>
+
+    <view class="admin-error" wx:if="{{error}}">{{error}}</view>
+
+    <view class="ed-actions">
+      <view
+        class="admin-btn admin-btn--primary ed-save {{saving ? 'admin-btn--disabled' : ''}}"
+        hover-class="admin-btn--pressed"
+        bindtap="onSave"
+      >{{saving ? '保存中…' : (mode === 'edit' ? '保存修改' : '保存并上架')}}</view>
+
+      <text class="ed-back" bindtap="onBack">返回商品列表</text>
+    </view>
+
+    <text class="admin-note">修改价格只影响之后的订单；已下单的历史订单保留原快照。所有改动写入本地 Mock 数据，重启小程序后仍在。</text>
+  </view>
+</view>

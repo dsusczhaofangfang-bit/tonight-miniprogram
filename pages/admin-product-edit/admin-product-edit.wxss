@@ -1,0 +1,110 @@
+@import "../../styles/admin.wxss";
+
+.edit-page {
+  padding-bottom: calc(60rpx + env(safe-area-inset-bottom));
+}
+
+.ed-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 0 24rpx;
+  border-bottom: 1rpx solid rgba(201, 168, 110, 0.25);
+}
+
+.ed-title {
+  color: #F4ECDF;
+  font-size: 32rpx;
+  letter-spacing: 5rpx;
+}
+
+/* 图片：只读预览 + 来源说明 */
+.ed-image {
+  display: flex;
+  padding: 26rpx 0;
+  border-bottom: 1rpx solid rgba(201, 168, 110, 0.14);
+}
+
+.ed-image-box {
+  flex: none;
+  margin-right: 24rpx;
+}
+
+.ed-image-img {
+  width: 132rpx;
+  height: 168rpx;
+  background: #241610;
+}
+
+.ed-image-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.ed-image-title {
+  display: block;
+  color: #C9A86E;
+  font-size: 24rpx;
+  letter-spacing: 2rpx;
+}
+
+.ed-image-hint {
+  display: block;
+  margin-top: 10rpx;
+  color: rgba(160, 143, 126, 0.85);
+  font-size: 21rpx;
+  line-height: 1.65;
+}
+
+.ed-fields {
+  margin-top: 4rpx;
+}
+
+.ed-switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ed-switch-main {
+  flex: 1;
+  min-width: 0;
+  padding-right: 20rpx;
+}
+
+.ed-switch-hint {
+  display: block;
+  margin-top: 6rpx;
+  color: rgba(160, 143, 126, 0.8);
+  font-size: 20rpx;
+  line-height: 1.5;
+}
+
+.ed-price {
+  display: flex;
+  align-items: baseline;
+}
+
+.ed-price-unit {
+  margin-right: 8rpx;
+  color: #D9A45B;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 32rpx;
+}
+
+.ed-actions {
+  margin-top: 36rpx;
+}
+
+.ed-save {
+  margin-bottom: 20rpx;
+}
+
+.ed-back {
+  display: block;
+  margin-top: 24rpx;
+  color: #A08F7E;
+  font-size: 22rpx;
+  text-align: center;
+  letter-spacing: 2rpx;
+}

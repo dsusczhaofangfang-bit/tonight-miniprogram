@@ -14,6 +14,11 @@
   height: 220rpx;
 }
 
+.product-img {
+  width: 100%;
+  height: 220rpx;
+}
+
 .product-cover-tag {
   position: absolute;
   top: 16rpx;
@@ -88,4 +93,9 @@
   color: #D9A45B;
   font-size: 34rpx;
   line-height: 1;
+}
+
+.product-add.is-disabled {
+  border-color: rgba(160, 143, 126, 0.25);
+  color: rgba(160, 143, 126, 0.4);
 }

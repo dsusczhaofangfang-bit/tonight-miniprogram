@@ -74,9 +74,32 @@ def draw_my(draw, color):
     polyline(draw, [(17, 61), (64, 61)], color)
 
 
+def draw_cart(draw, color):
+    # 提手（上半圆）
+    bbox = [27 * SCALE, 14 * SCALE, 54 * SCALE, 41 * SCALE]
+    draw.arc(bbox, 180, 360, fill=color, width=STROKE * SCALE)
+    # 袋身
+    polyline(draw, [(17, 30), (64, 30), (59, 67), (22, 67), (17, 30)], color)
+
+
+def draw_orders(draw, color):
+    # 单据外框 + 锯齿下边
+    polyline(
+        draw,
+        [(23, 13), (58, 13), (58, 63), (51.5, 69), (45, 63), (38.5, 69), (32, 63), (25.5, 69), (23, 63), (23, 13)],
+        color,
+    )
+    # 内容行
+    polyline(draw, [(31, 28), (50, 28)], color)
+    polyline(draw, [(31, 38), (50, 38)], color)
+    polyline(draw, [(31, 48), (42, 48)], color)
+
+
 ICONS = {
     "tab-home": draw_home,
     "tab-menu": draw_menu,
+    "tab-cart": draw_cart,
+    "tab-orders": draw_orders,
     "tab-my": draw_my,
 }
 

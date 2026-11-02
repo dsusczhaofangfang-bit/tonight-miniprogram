@@ -1,13 +1,17 @@
 const api = require('./api');
 const storage = require('../utils/storage');
 const { STORAGE_KEYS } = require('../utils/constants');
+const config = require('../config/index');
 const categorySeed = require('../utils/mock-data/categories');
 
+// 种子版本变化时重建缓存：改过 mock-data 后客户端无需手动「重置演示数据」
 function loadAll() {
+  const seeded = storage.get(STORAGE_KEYS.SEED_CATEGORIES, '');
   let list = storage.get(STORAGE_KEYS.CATEGORIES, null);
-  if (!Array.isArray(list) || list.length === 0) {
+  if (seeded !== config.seedVersion || !Array.isArray(list) || list.length === 0) {
     list = api.clone(categorySeed);
     storage.set(STORAGE_KEYS.CATEGORIES, list);
+    storage.set(STORAGE_KEYS.SEED_CATEGORIES, config.seedVersion);
   }
   return list;
 }
@@ -24,6 +28,11 @@ function listCategories(options = {}) {
   const includeDisabled = options.includeDisabled === true;
   const list = sortList(loadAll().filter((item) => includeDisabled || item.enabled !== false));
   return api.success(api.clone(list));
+}
+
+// 同步读取启用中的分类：下单时写订单快照用，不经过 Promise
+function listAllSync() {
+  return sortList(loadAll().filter((item) => item.enabled !== false));
 }
 
 function getCategory(id) {
@@ -80,7 +89,7 @@ function removeCategory(id) {
   if (index < 0) return api.fail(4040, '分类不存在');
 
   const products = storage.get(STORAGE_KEYS.PRODUCTS, null) || [];
-  if (products.some((item) => item.categoryId === id)) {
+  if (products.some((item) => item.category === id)) {
     return api.fail(4003, '该分类下还有商品，无法删除');
   }
 
@@ -91,6 +100,7 @@ function removeCategory(id) {
 
 module.exports = {
   listCategories,
+  listAllSync,
   getCategory,
   createCategory,
   updateCategory,

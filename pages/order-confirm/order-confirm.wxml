@@ -1,0 +1,112 @@
+<view class="confirm" wx:if="{{!loading && !empty}}">
+  <view class="confirm-head">
+    <text class="confirm-title">确认订单</text>
+    <text class="confirm-note">{{demoMode ? '演示模式 · 不产生真实支付' : ''}}</text>
+  </view>
+
+  <view class="table-card {{table ? '' : 'is-missing'}}">
+    <block wx:if="{{table}}">
+      <text class="table-label">当前桌号</text>
+      <text class="table-name">{{table.name}}</text>
+      <text class="table-area">{{table.area}}</text>
+    </block>
+    <block wx:else>
+      <text class="table-warning">未识别到桌号</text>
+      <text class="table-hint">请用微信扫描桌面上的桌号二维码重新进入；本页不会自动生成桌号。</text>
+      <view wx:if="{{isDev}}" class="table-dev" bindtap="onGoDevCheck">调试：去「开发自检」选择桌号</view>
+    </block>
+  </view>
+
+  <view class="section">
+    <view class="section-head">
+      <text class="section-title">已选商品</text>
+      <text class="section-note">共 {{totalQty}} 件</text>
+    </view>
+
+    <view class="line" wx:for="{{items}}" wx:key="productId">
+      <image
+        wx:if="{{item.image}}"
+        class="line-img"
+        src="{{item.image}}"
+        mode="aspectFill"
+        data-index="{{index}}"
+        binderror="onImageError"
+      />
+      <view wx:else class="line-label">
+        <text class="line-label-cat">{{item.categoryName}}</text>
+        <text class="line-label-demo">示例图</text>
+      </view>
+
+      <view class="line-body">
+        <text class="line-name">{{item.name}}</text>
+        <text class="line-en">{{item.nameEn}}</text>
+
+        <view class="line-meta">
+          <text class="line-price">¥{{item.priceText}}</text>
+          <quantity-stepper
+            value="{{item.qty}}"
+            min="{{1}}"
+            max="{{99}}"
+            data-id="{{item.productId}}"
+            bind:change="onQtyChange"
+          ></quantity-stepper>
+        </view>
+
+        <text class="line-sub">小计 ¥{{item.subtotalText}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-head">
+      <text class="section-title">备注</text>
+      <text class="section-note">{{remarkLen}}/{{remarkMax}}</text>
+    </view>
+    <textarea
+      class="remark"
+      value="{{remark}}"
+      maxlength="{{remarkMax}}"
+      placeholder="口味、忌口、上酒顺序等（选填）"
+      placeholder-class="remark-placeholder"
+      auto-height
+      bindinput="onRemarkInput"
+    />
+  </view>
+
+  <view class="section">
+    <view class="total-row">
+      <text class="total-label">商品小计</text>
+      <text class="total-value">¥{{totalText}}</text>
+    </view>
+    <view class="total-row total-row--strong">
+      <text class="total-label">订单总额</text>
+      <text class="total-amount">¥{{totalText}}</text>
+    </view>
+  </view>
+
+  <view class="submit-space"></view>
+</view>
+
+<view class="loading" wx:if="{{loading}}">加载中…</view>
+
+<block wx:if="{{!loading && empty}}">
+  <empty-state text="没有可结算的商品" hint="返回购物车勾选商品后再来结算"></empty-state>
+  <view class="empty-action">
+    <view class="ghost-btn" hover-class="ghost-btn--pressed" bindtap="onBackToCart">返回购物车</view>
+  </view>
+  <view class="empty-action">
+    <view class="ghost-btn" hover-class="ghost-btn--pressed" bindtap="onGoMenu">去酒单</view>
+  </view>
+</block>
+
+<view class="submit-bar" wx:if="{{!loading && !empty}}">
+  <view class="submit-total">
+    <text class="submit-label">合计</text>
+    <text class="submit-amount">¥{{totalText}}</text>
+  </view>
+  <view
+    class="submit-btn {{!table || submitting ? 'is-disabled' : ''}}"
+    hover-class="{{!table || submitting ? 'none' : 'submit-btn--pressed'}}"
+    bindtap="onSubmit"
+  >{{submitting ? '提交中…' : '提交订单'}}</view>
+</view>

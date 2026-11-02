@@ -4,6 +4,30 @@
     <text class="dev-sub">Mock 数据层连通性检查 · v{{version}}</text>
   </view>
 
+  <view class="card table-card">
+    <view class="table-row">
+      <view class="table-info">
+        <text class="table-label">当前桌号（调试）</text>
+        <text class="table-value">{{tableName ? tableName + ' · ' + tableArea : '未设置'}}</text>
+      </view>
+      <picker mode="selector" range="{{tableOptions}}" range-key="label" value="{{tableIndex}}" bindchange="onTablePick">
+        <view class="table-pick">选择桌号</view>
+      </picker>
+    </view>
+    <text class="table-hint">没有真实二维码时，用这里代替扫码，效果与扫码带入一致；只接受配置里启用中的桌号，正式环境仍以桌面二维码为准。</text>
+  </view>
+
+  <view class="card table-card">
+    <view class="table-row">
+      <view class="table-info">
+        <text class="table-label">老板管理后台（演示）</text>
+        <text class="table-value">{{ownerText}}</text>
+      </view>
+      <view class="table-pick" bindtap="onAdminLogin">去登录</view>
+    </view>
+    <text class="table-hint">演示口令 8888。正式版必须由云函数校验管理员身份，前端入口与口令都不构成安全边界。</text>
+  </view>
+
   <view class="card check-list">
     <view class="check-item" wx:for="{{checks}}" wx:key="name">
       <view class="check-dot {{item.ok ? 'is-ok' : 'is-fail'}}"></view>

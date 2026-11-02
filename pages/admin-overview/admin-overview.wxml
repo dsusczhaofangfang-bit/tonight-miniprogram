@@ -1,0 +1,88 @@
+<view class="admin-page">
+  <view class="admin-top">
+    <view class="admin-top-main">
+      <text class="admin-brand">柠舍唔同</text>
+      <text class="admin-sub">老板管理 · 演示数据</text>
+    </view>
+    <view class="admin-top-actions">
+      <text class="admin-top-link" bindtap="onBackToCustomer">顾客端</text>
+      <text class="admin-top-link" bindtap="onLogout">退出</text>
+    </view>
+  </view>
+
+  <view class="admin-body">
+    <view class="ov-head">
+      <text class="ov-title">今日经营</text>
+      <text class="ov-date">{{dateText}}</text>
+    </view>
+
+    <view class="ov-grid">
+      <view class="ov-cell">
+        <text class="ov-num">{{overview.todayOrderCount}}</text>
+        <text class="ov-label">今日订单</text>
+        <text class="ov-extra">已取消不计入</text>
+      </view>
+      <view class="ov-cell">
+        <text class="ov-num ov-num--money"><text class="admin-money-unit">¥</text>{{overview.todayRevenueText}}</text>
+        <text class="ov-label">今日营业额</text>
+        <text class="ov-extra">已取消不计入</text>
+      </view>
+      <view class="ov-cell">
+        <text class="ov-num">{{overview.handlingCount}}</text>
+        <text class="ov-label">待处理订单</text>
+        <text class="ov-extra">待接单 {{overview.pendingCount}} · 制作中 {{overview.makingCount}}</text>
+      </view>
+      <view class="ov-cell">
+        <text class="ov-num">{{overview.onSaleCount}}</text>
+        <text class="ov-label">在售商品</text>
+        <text class="ov-extra">下架 {{overview.offSaleCount}} 款</text>
+      </view>
+    </view>
+
+    <view class="ov-alert" wx:if="{{overview.openExceptionCount}}">
+      <text class="ov-alert-text">有 {{overview.openExceptionCount}} 笔订单存在待处理异常</text>
+      <text class="ov-alert-link" bindtap="onGoOrders">去处理</text>
+    </view>
+
+    <view class="ov-actions">
+      <view class="admin-btn admin-btn--primary" bindtap="onGoOrders" hover-class="admin-btn--pressed">订单管理</view>
+      <view class="admin-btn admin-btn--ghost" bindtap="onGoProducts" hover-class="admin-btn--pressed">商品管理</view>
+    </view>
+
+    <view class="admin-section">
+      <view class="admin-section-head">
+        <text class="admin-section-title">最近订单</text>
+        <text class="admin-section-more" bindtap="onGoOrders">全部订单</text>
+      </view>
+
+      <view class="admin-list" wx:if="{{recentOrders.length}}">
+        <view
+          class="ov-order"
+          wx:for="{{recentOrders}}"
+          wx:key="id"
+          data-id="{{item.id}}"
+          bindtap="onOrderTap"
+          hover-class="admin-row--pressed"
+        >
+          <view class="ov-order-head">
+            <text class="ov-order-no">{{item.orderNo}}</text>
+            <status-tag status="{{item.status}}"></status-tag>
+          </view>
+          <view class="ov-order-meta">
+            <text class="ov-order-table">{{item.tableText}}</text>
+            <text class="ov-order-dot">·</text>
+            <text class="ov-order-time">{{item.timeText}}</text>
+            <text class="ov-order-amount admin-money"><text class="admin-money-unit">¥</text>{{item.amountText}}</text>
+          </view>
+          <text class="ov-order-exception" wx:if="{{item.hasException}}">存在待处理异常</text>
+        </view>
+      </view>
+
+      <empty-state wx:else text="暂无订单" hint="顾客下单后会出现在这里"></empty-state>
+    </view>
+
+    <text class="admin-note">{{updatedText}} · 本地 Mock 数据，重启小程序后仍保留</text>
+  </view>
+
+  <admin-nav active="overview"></admin-nav>
+</view>

@@ -73,6 +73,12 @@
   letter-spacing: 2rpx;
 }
 
+/* 已登录老板：入口值用金色区分，避免与普通条目混淆 */
+.entry-owner {
+  color: #D9A45B;
+  letter-spacing: 1rpx;
+}
+
 .my-footer {
   margin-top: 64rpx;
   color: rgba(160, 143, 126, 0.6);

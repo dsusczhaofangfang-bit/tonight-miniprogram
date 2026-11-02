@@ -1,123 +1,342 @@
-.home-page {
-  padding-top: 56rpx;
+/* 首页：编辑式排版，左对齐。
+   约束：不用圆角卡片、不用阴影、不用渐变装饰、不做眉标、不加箭头；
+   层次只靠字号、字距、细线与留白。商品图用酒标式占位块，不伪造产品照。 */
+
+.home {
+  position: relative;
+  min-height: 100vh;
+  padding: 0 32rpx 48rpx;
+  background: #0B0A09;
 }
 
-.hero {
+.topbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: 24rpx;
+}
+
+.brand {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 24rpx 24rpx 56rpx;
+  padding-top: 16rpx;
 }
 
-.hero-eyebrow {
-  color: rgba(201, 168, 110, 0.8);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 20rpx;
-  letter-spacing: 8rpx;
-}
-
-.hero-title {
-  margin-top: 28rpx;
+.brand-cn {
   color: #F4ECDF;
-  font-size: 76rpx;
-  letter-spacing: 14rpx;
-  text-indent: 14rpx;
+  font-size: 56rpx;
+  line-height: 1.1;
+  letter-spacing: 10rpx;
+  text-indent: 10rpx;
 }
 
-.hero-rule {
-  width: 88rpx;
-  height: 1rpx;
-  margin: 32rpx 0;
-  background: rgba(201, 168, 110, 0.55);
+.brand-en {
+  margin-top: 12rpx;
+  color: #D9A45B;
+  font-size: 18rpx;
+  line-height: 1.4;
+  letter-spacing: 6rpx;
+  text-indent: 6rpx;
 }
 
-.hero-slogan {
+.profile-entry {
+  position: absolute;
+  right: 32rpx;
+  z-index: 2;
+  padding: 16rpx 0 16rpx 28rpx;
   color: #A08F7E;
-  font-size: 26rpx;
-  letter-spacing: 4rpx;
-}
-
-.hero-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin-top: 64rpx;
-}
-
-.hero-btn {
-  width: 420rpx;
-}
-
-.hero-link {
-  margin-top: 28rpx;
-  color: #C9A86E;
   font-size: 24rpx;
+  line-height: 1;
   letter-spacing: 2rpx;
 }
 
-.shop-card {
-  margin-top: 16rpx;
+.profile-entry--pressed {
+  opacity: 0.45;
 }
 
-.shop-head {
+.rule {
+  height: 1rpx;
+  background: rgba(201, 168, 110, 0.25);
+}
+
+.intro {
+  display: block;
+  margin-top: 28rpx;
+  color: #A08F7E;
+  font-size: 26rpx;
+  line-height: 1.7;
+  letter-spacing: 1rpx;
+}
+
+.table-row {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 24rpx;
+  align-items: baseline;
+  margin-top: 18rpx;
 }
 
-.shop-title {
-  color: #C9A86E;
+.table-label {
+  margin-right: 16rpx;
+  color: #A08F7E;
+  font-size: 22rpx;
+  letter-spacing: 2rpx;
+}
+
+.table-name {
+  color: #D9A45B;
   font-size: 30rpx;
   letter-spacing: 4rpx;
 }
 
-.shop-row {
-  display: flex;
-  align-items: flex-start;
-  padding: 14rpx 0;
-  border-top: 1rpx solid rgba(201, 168, 110, 0.12);
+.table-area {
+  margin-left: 12rpx;
+  color: rgba(160, 143, 126, 0.8);
+  font-size: 22rpx;
 }
 
-.shop-label {
-  width: 100rpx;
-  color: #A08F7E;
-  font-size: 24rpx;
-}
-
-.shop-value {
-  flex: 1;
-  color: #F4ECDF;
-  font-size: 26rpx;
-}
-
-.shop-actions {
-  display: flex;
-  margin-top: 24rpx;
-}
-
-.shop-action {
+.start-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1;
-  height: 72rpx;
-  margin-right: 20rpx;
-  border: 1rpx solid rgba(201, 168, 110, 0.35);
-  border-radius: 10rpx;
+  width: 100%;
+  height: 88rpx;
+  margin-top: 40rpx;
+  border: 1rpx solid rgba(201, 168, 110, 0.45);
+  border-radius: 4rpx;
+  background: #5A1A24;
+  color: #F4ECDF;
+  font-size: 30rpx;
+  letter-spacing: 10rpx;
+  text-indent: 10rpx;
+}
+
+.start-btn--pressed {
+  opacity: 0.8;
+}
+
+.section {
+  margin-top: 88rpx;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 24rpx;
+}
+
+.section-title {
   color: #C9A86E;
-  font-size: 24rpx;
+  font-size: 32rpx;
+  letter-spacing: 6rpx;
 }
 
-.shop-action:last-child {
-  margin-right: 0;
+.section-note {
+  color: rgba(160, 143, 126, 0.85);
+  font-size: 20rpx;
+  letter-spacing: 2rpx;
 }
 
-.home-footer {
-  margin-top: 56rpx;
+/* 分类：2×2 细线网格，四个格子完全同构，不做圆角卡片 */
+.category-grid {
+  display: flex;
+  flex-wrap: wrap;
+  border-right: 1rpx solid rgba(201, 168, 110, 0.25);
+  border-bottom: 1rpx solid rgba(201, 168, 110, 0.25);
+}
+
+.category-cell {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 50%;
+  padding: 30rpx 24rpx;
+  border-top: 1rpx solid rgba(201, 168, 110, 0.25);
+  border-left: 1rpx solid rgba(201, 168, 110, 0.25);
+}
+
+.category-cell--pressed {
+  background: rgba(201, 168, 110, 0.08);
+}
+
+.category-name {
+  color: #F4ECDF;
+  font-size: 32rpx;
+  letter-spacing: 4rpx;
+}
+
+.category-en {
+  margin-top: 8rpx;
+  color: #A08F7E;
+  font-size: 18rpx;
+  letter-spacing: 2rpx;
+}
+
+/* 今晚推荐：左图块 + 右信息，条目间细线分隔 */
+.featured-list {
+  border-bottom: 1rpx solid rgba(201, 168, 110, 0.18);
+}
+
+.featured {
+  display: flex;
+  padding: 28rpx 0;
+  border-top: 1rpx solid rgba(201, 168, 110, 0.18);
+}
+
+.featured--pressed {
+  opacity: 0.75;
+}
+
+/* 酒标式占位块：深胡桃底 + 内金框 + 分类名，不冒充产品照 */
+.label-block {
+  position: relative;
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 176rpx;
+  height: 176rpx;
+  margin-right: 28rpx;
+  background: #241610;
+}
+
+.label-block::after {
+  content: '';
+  position: absolute;
+  top: 12rpx;
+  right: 12rpx;
+  bottom: 12rpx;
+  left: 12rpx;
+  border: 1rpx solid rgba(201, 168, 110, 0.35);
+}
+
+.label-name {
+  color: #C9A86E;
+  font-size: 22rpx;
+  letter-spacing: 4rpx;
+  text-indent: 4rpx;
+}
+
+.label-demo {
+  position: absolute;
+  right: 18rpx;
+  bottom: 14rpx;
+  color: rgba(160, 143, 126, 0.75);
+  font-size: 16rpx;
+  letter-spacing: 1rpx;
+}
+
+.featured-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 4rpx 0;
+}
+
+.featured-name {
+  color: #F4ECDF;
+  font-size: 30rpx;
+  letter-spacing: 2rpx;
+}
+
+.featured-en {
+  margin-top: 4rpx;
+  color: #A08F7E;
+  font-size: 18rpx;
+  letter-spacing: 1rpx;
+}
+
+.featured-desc {
+  margin-top: 10rpx;
+  color: rgba(160, 143, 126, 0.9);
+  font-size: 22rpx;
+  line-height: 1.5;
+}
+
+.featured-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 12rpx;
+}
+
+.price {
+  color: #D9A45B;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 32rpx;
+  letter-spacing: 1rpx;
+}
+
+.price-yen {
+  margin-right: 4rpx;
+  font-size: 20rpx;
+}
+
+.add {
+  padding: 8rpx 26rpx;
+  border: 1rpx solid rgba(217, 164, 91, 0.55);
+  border-radius: 4rpx;
+  color: #D9A45B;
+  font-size: 22rpx;
+  letter-spacing: 4rpx;
+  text-indent: 4rpx;
+}
+
+.add--pressed {
+  background: rgba(217, 164, 91, 0.14);
+}
+
+/* 当季推荐：纯文字编辑位，无图块、无按钮 */
+.seasonal {
+  padding: 24rpx 0;
+  border-top: 1rpx solid rgba(201, 168, 110, 0.18);
+}
+
+.seasonal--pressed {
+  opacity: 0.75;
+}
+
+.seasonal-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.seasonal-name {
+  color: #F4ECDF;
+  font-size: 28rpx;
+  letter-spacing: 2rpx;
+}
+
+.seasonal-price {
+  color: #A08F7E;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 22rpx;
+}
+
+.seasonal-note {
+  display: block;
+  margin-top: 8rpx;
+  color: #A08F7E;
+  font-size: 22rpx;
+  line-height: 1.6;
+}
+
+.tip {
+  display: block;
+  padding: 40rpx 0;
+  color: #A08F7E;
+  font-size: 22rpx;
+  letter-spacing: 2rpx;
+  text-align: center;
+}
+
+.home-foot {
+  margin-top: 80rpx;
+  padding-top: 24rpx;
+  border-top: 1rpx solid rgba(201, 168, 110, 0.15);
   color: rgba(160, 143, 126, 0.6);
   font-size: 20rpx;
-  text-align: center;
   letter-spacing: 2rpx;
+  text-align: center;
 }

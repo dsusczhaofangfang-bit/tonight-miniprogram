@@ -1,0 +1,160 @@
+.orders {
+  min-height: 100vh;
+  padding: 40rpx 32rpx calc(40rpx + env(safe-area-inset-bottom));
+  background: #0B0A09;
+}
+
+.orders-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.orders-title {
+  color: #F4ECDF;
+  font-size: 48rpx;
+  letter-spacing: 8rpx;
+}
+
+.orders-note {
+  color: #A08F7E;
+  font-size: 20rpx;
+  letter-spacing: 1rpx;
+}
+
+/* 状态筛选：横向滚动，激活项用玫瑰红下划线，不加背景块 */
+.filter-bar {
+  margin-top: 20rpx;
+  padding-bottom: 4rpx;
+  border-bottom: 1rpx solid rgba(201, 168, 110, 0.18);
+  white-space: nowrap;
+}
+
+.filter-item {
+  display: inline-block;
+  margin-right: 34rpx;
+  padding: 12rpx 0;
+  border-bottom: 2rpx solid transparent;
+  color: #A08F7E;
+  font-size: 24rpx;
+  letter-spacing: 2rpx;
+}
+
+.filter-item.is-active {
+  color: #F4ECDF;
+  border-bottom-color: #A32B41;
+}
+
+.order-card {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20rpx;
+  padding: 24rpx;
+  border: 1rpx solid rgba(201, 168, 110, 0.18);
+  background: #14100D;
+}
+
+.order-card--pressed {
+  background: #1B1511;
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-no {
+  color: #A08F7E;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 22rpx;
+  letter-spacing: 1rpx;
+}
+
+.card-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: 12rpx;
+  color: rgba(160, 143, 126, 0.8);
+  font-size: 20rpx;
+}
+
+.card-summary {
+  display: block;
+  margin-top: 14rpx;
+  color: #F4ECDF;
+  font-size: 26rpx;
+  letter-spacing: 1rpx;
+}
+
+.card-foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: 16rpx;
+  padding-top: 14rpx;
+  border-top: 1rpx solid rgba(201, 168, 110, 0.12);
+}
+
+.card-qty {
+  color: rgba(160, 143, 126, 0.85);
+  font-size: 20rpx;
+}
+
+.card-amount {
+  color: #D9A45B;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 30rpx;
+}
+
+/* 加载骨架：静态占位，无动效 */
+.sk-card {
+  margin-top: 20rpx;
+  padding: 24rpx;
+  border: 1rpx solid rgba(201, 168, 110, 0.1);
+  background: #14100D;
+}
+
+.sk-line {
+  height: 20rpx;
+  margin-top: 14rpx;
+  background: rgba(201, 168, 110, 0.1);
+}
+
+.sk-line--wide {
+  width: 70%;
+  margin-top: 0;
+}
+
+.sk-line--short {
+  width: 40%;
+}
+
+.orders-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 16rpx;
+}
+
+.orders-foot {
+  margin-top: 24rpx;
+  color: rgba(160, 143, 126, 0.55);
+  font-size: 18rpx;
+  letter-spacing: 1rpx;
+  text-align: center;
+}
+
+.ghost-btn {
+  padding: 20rpx 56rpx;
+  border: 1rpx solid rgba(201, 168, 110, 0.45);
+  border-radius: 4rpx;
+  color: #C9A86E;
+  font-size: 26rpx;
+  letter-spacing: 4rpx;
+  text-indent: 4rpx;
+}
+
+.ghost-btn--pressed {
+  background: rgba(201, 168, 110, 0.12);
+}

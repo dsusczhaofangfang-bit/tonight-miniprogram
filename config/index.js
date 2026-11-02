@@ -1,12 +1,19 @@
 module.exports = {
-  version: '0.1.0',
+  version: '0.2.0',
   // 当前阶段全部使用 Mock 数据；M4 接入 CloudBase 后切换
   useMock: true,
   // Mock 接口模拟延迟区间（毫秒）
   mockDelay: [120, 260],
   // 演示阶段管理员口令：仅在本地模拟鉴权时使用，上线前必须移除
   demoAdminPassword: '8888',
+  // 老板管理端口令（演示）。与 demoAdminPassword 分开，便于以后区分店主/调酒师
+  demoOwnerPassword: '8888',
   demoMode: true,
+  // 本地示例数据版本：改动 utils/mock-data 里的分类或商品后递增，
+  // 客户端会在下次启动时自动重建缓存，不需要手动「重置演示数据」
+  seedVersion: '2026-11-02-menu-v1',
+  // 桌号表的种子版本：改 utils/mock-data/tables.js 后递增，客户端下次启动自动重建
+  tableSeedVersion: '2026-11-02-tables-v1',
   brand: {
     name: '柠舍唔同',
     nameEn: 'COCKTAIL & WHISKEY BAR',

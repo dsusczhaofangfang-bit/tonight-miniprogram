@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "订单管理",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "admin-nav": "/components/admin-nav/admin-nav",
+    "status-tag": "/components/status-tag/status-tag",
+    "empty-state": "/components/empty-state/empty-state"
+  }
+}

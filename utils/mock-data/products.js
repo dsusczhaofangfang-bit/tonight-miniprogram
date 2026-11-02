@@ -1,51 +1,34 @@
 // 示例商品数据：每类 6 款，共 24 款。
-// 注意：名称、价格、简介均为示例，不代表酒馆真实酒单，后续由真实数据替换。
+// 字段与 docs/01 第 5 章一致：id / name / category / price / description / image / isAvailable。
+// 名称、价格、介绍均为示例，不代表酒馆真实酒单，后续由真实数据替换。
+// category 取值与 utils/mock-data/categories.js 的 id 一一对应。
 const GROUPS = [
-  {
-    categoryId: 'cat_cocktail',
-    nameCn: '鸡尾酒',
-    nameEn: 'Cocktail',
-    prices: [5800, 6800, 7800, 6800, 8800, 6200]
-  },
-  {
-    categoryId: 'cat_whiskey',
-    nameCn: '威士忌',
-    nameEn: 'Whiskey',
-    prices: [8800, 9800, 10800, 12800, 7800, 15800]
-  },
-  {
-    categoryId: 'cat_beer',
-    nameCn: '啤酒',
-    nameEn: 'Beer',
-    prices: [2800, 3200, 3800, 4200, 3600, 4800]
-  },
-  {
-    categoryId: 'cat_snacks',
-    nameCn: '小食',
-    nameEn: 'Snacks',
-    prices: [2800, 3200, 3600, 4200, 2600, 3800]
-  }
+  { category: 'traditional', label: '传统饮品', en: 'Classics', prices: [5800, 6800, 7800, 6200, 8800, 6800] },
+  { category: 'signature', label: '特调饮品', en: 'Signature', prices: [6800, 7800, 8800, 9800, 7200, 8800] },
+  { category: 'non_alcoholic', label: '无酒精饮品', en: 'Non-alcoholic', prices: [3200, 3600, 3800, 4200, 3600, 4600] },
+  { category: 'snacks', label: '小吃', en: 'Snacks', prices: [2800, 3200, 3600, 4200, 2600, 3800] }
 ];
+
+const DESCRIPTION = '示例数据：风味、配方与口感待替换为真实酒单内容。';
 
 const products = [];
 
 GROUPS.forEach((group) => {
-  const categoryKey = group.categoryId.replace('cat_', '');
   group.prices.forEach((price, index) => {
     const no = String(index + 1).padStart(2, '0');
     products.push({
-      id: `p_${categoryKey}_${no}`,
-      categoryId: group.categoryId,
-      name: `示例·${group.nameCn} ${no}`,
-      nameEn: `Demo ${group.nameEn} ${no}`,
-      desc: '示例数据，待替换为真实酒单。',
+      id: `p_${group.category}_${no}`,
+      name: `示例·${group.label} ${no}`,
+      nameEn: `Demo ${group.en} ${no}`,
+      category: group.category,
       price,
+      description: DESCRIPTION,
+      // 暂无真实商品图：留空时页面统一显示 CSS 酒标式占位块
       image: '',
+      isAvailable: true,
       tags: ['示例'],
       abv: null,
-      status: 'on',
-      sort: (index + 1) * 10,
-      isDemo: true
+      sort: (index + 1) * 10
     });
   });
 });

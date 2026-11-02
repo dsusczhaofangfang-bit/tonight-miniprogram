@@ -1,0 +1,223 @@
+.cart {
+  min-height: 100vh;
+  padding: 40rpx 32rpx 320rpx;
+  background: #0B0A09;
+}
+
+.cart-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 8rpx;
+}
+
+.cart-title {
+  color: #F4ECDF;
+  font-size: 48rpx;
+  letter-spacing: 8rpx;
+}
+
+.cart-clear {
+  padding: 8rpx 0 8rpx 24rpx;
+  color: #A08F7E;
+  font-size: 24rpx;
+  letter-spacing: 2rpx;
+}
+
+.cart-list {
+  margin-top: 24rpx;
+  border-top: 1rpx solid rgba(201, 168, 110, 0.18);
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  padding: 28rpx 0;
+  border-bottom: 1rpx solid rgba(201, 168, 110, 0.18);
+}
+
+.item-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding-right: 20rpx;
+}
+
+.item-name {
+  color: #F4ECDF;
+  font-size: 30rpx;
+  letter-spacing: 1rpx;
+}
+
+.item-en {
+  margin-top: 4rpx;
+  color: #A08F7E;
+  font-size: 18rpx;
+  letter-spacing: 1rpx;
+}
+
+.item-meta {
+  display: flex;
+  align-items: baseline;
+  margin-top: 12rpx;
+}
+
+.item-price {
+  color: #D9A45B;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28rpx;
+}
+
+.item-sub {
+  margin-left: 16rpx;
+  color: #A08F7E;
+  font-size: 20rpx;
+}
+
+.item-side {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.item-remove {
+  padding: 0 0 12rpx;
+  color: rgba(160, 143, 126, 0.85);
+  font-size: 20rpx;
+  letter-spacing: 1rpx;
+}
+
+.empty-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 24rpx;
+}
+
+.ghost-btn {
+  padding: 20rpx 56rpx;
+  border: 1rpx solid rgba(201, 168, 110, 0.45);
+  border-radius: 4rpx;
+  color: #C9A86E;
+  font-size: 26rpx;
+  letter-spacing: 4rpx;
+  text-indent: 4rpx;
+}
+
+.ghost-btn--pressed {
+  background: rgba(201, 168, 110, 0.12);
+}
+
+/* 底部结算区：tab 页的可视区已排除 tabBar，这里不需要再补安全区 */
+.cart-foot {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-top: 1rpx solid rgba(201, 168, 110, 0.25);
+  background: #14100D;
+}
+
+.foot-note {
+  padding: 12rpx 32rpx 0;
+  color: rgba(160, 143, 126, 0.6);
+  font-size: 18rpx;
+  letter-spacing: 1rpx;
+  text-align: center;
+}
+
+.cart-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18rpx 32rpx 22rpx;
+}
+
+.bar-total {
+  display: flex;
+  align-items: baseline;
+}
+
+.bar-label {
+  color: #A08F7E;
+  font-size: 22rpx;
+  letter-spacing: 2rpx;
+}
+
+.bar-amount {
+  margin-left: 12rpx;
+  color: #D9A45B;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 36rpx;
+}
+
+.bar-qty {
+  margin-left: 12rpx;
+  color: rgba(160, 143, 126, 0.85);
+  font-size: 20rpx;
+}
+
+.bar-btn {
+  padding: 18rpx 44rpx;
+  border: 1rpx solid rgba(201, 168, 110, 0.45);
+  border-radius: 4rpx;
+  background: #5A1A24;
+  color: #F4ECDF;
+  font-size: 26rpx;
+  letter-spacing: 4rpx;
+  text-indent: 4rpx;
+}
+
+.bar-btn--pressed {
+  opacity: 0.8;
+}
+
+/* 勾选：圆形描边，与价格/竖条同色系，不引入新色板 */
+.check {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 36rpx;
+  height: 36rpx;
+  border: 1rpx solid rgba(201, 168, 110, 0.55);
+  border-radius: 50%;
+}
+
+.check.is-checked {
+  border-color: #A32B41;
+  background: #5A1A24;
+}
+
+.check-mark {
+  color: #F4ECDF;
+  font-size: 20rpx;
+  line-height: 1;
+}
+
+.cart-item .check {
+  margin-right: 20rpx;
+}
+
+.bar-select {
+  display: flex;
+  align-items: center;
+}
+
+.bar-select .check {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 12rpx;
+}
+
+.bar-select-text {
+  color: #A08F7E;
+  font-size: 22rpx;
+  letter-spacing: 2rpx;
+}
+
+.bar-btn.is-disabled {
+  border-color: rgba(160, 143, 126, 0.25);
+  background: #2A1D18;
+  color: rgba(244, 236, 223, 0.4);
+}

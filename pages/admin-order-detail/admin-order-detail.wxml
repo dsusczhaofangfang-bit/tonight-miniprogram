@@ -1,0 +1,156 @@
+<view class="admin-page" wx:if="{{order}}">
+  <view class="admin-top">
+    <view class="admin-top-main">
+      <text class="admin-brand">柠舍唔同</text>
+      <text class="admin-sub">老板管理 · 演示数据</text>
+    </view>
+    <view class="admin-top-actions">
+      <text class="admin-top-link" bindtap="onBackToCustomer">顾客端</text>
+      <text class="admin-top-link" bindtap="onLogout">退出</text>
+    </view>
+  </view>
+
+  <view class="admin-body">
+    <view class="ad-head">
+      <view class="ad-head-main">
+        <status-tag status="{{order.status}}"></status-tag>
+        <text class="ad-state">{{statusText}}</text>
+      </view>
+      <text class="ad-time">{{timeText}}</text>
+    </view>
+
+    <view class="ad-info">
+      <view class="ad-row">
+        <text class="ad-label">订单编号</text>
+        <text class="ad-value ad-mono">{{order.orderNo}}</text>
+      </view>
+      <view class="ad-row">
+        <text class="ad-label">桌号</text>
+        <text class="ad-value">{{order.tableName}}{{order.tableArea ? ' · ' + order.tableArea : ''}}</text>
+      </view>
+      <view class="ad-row">
+        <text class="ad-label">下单时间</text>
+        <text class="ad-value">{{timeText}}</text>
+      </view>
+      <view class="ad-row">
+        <text class="ad-label">最近更新</text>
+        <text class="ad-value">{{updatedText}}</text>
+      </view>
+    </view>
+
+    <view class="ad-section">
+      <view class="admin-section-head">
+        <text class="admin-section-title">商品清单</text>
+        <text class="ad-section-note">共 {{order.totalQty}} 件</text>
+      </view>
+
+      <view class="ad-item" wx:for="{{items}}" wx:key="productId">
+        <image wx:if="{{item.image}}" class="ad-item-img" src="{{item.image}}" mode="aspectFill" />
+        <label-block wx:else category-name="{{item.categoryName}}" size="xs"></label-block>
+
+        <view class="ad-item-main">
+          <text class="ad-item-name">{{item.name}}</text>
+          <text class="ad-item-en">{{item.categoryName}}{{item.nameEn ? ' · ' + item.nameEn : ''}}</text>
+          <text class="ad-item-price">¥{{item.priceText}} × {{item.qty}}</text>
+        </view>
+
+        <text class="ad-item-sub admin-money"><text class="admin-money-unit">¥</text>{{item.subtotalText}}</text>
+      </view>
+
+      <view class="ad-total">
+        <text class="ad-total-label">订单总额</text>
+        <text class="ad-total-value admin-money"><text class="admin-money-unit">¥</text>{{totalText}}</text>
+      </view>
+    </view>
+
+    <view class="ad-section">
+      <view class="admin-section-head">
+        <text class="admin-section-title">顾客备注</text>
+      </view>
+      <text class="ad-remark" wx:if="{{order.remark}}">{{order.remark}}</text>
+      <text class="ad-remark ad-remark--empty" wx:else>无备注</text>
+    </view>
+
+    <view class="ad-section" wx:if="{{exception}}">
+      <view class="admin-section-head">
+        <text class="admin-section-title">订单异常</text>
+        <text class="ad-exception-state ad-exception-state--{{exception.status}}">{{exceptionText}}</text>
+      </view>
+      <view class="ad-exception">
+        <text class="ad-exception-reason">原因：{{exception.reason}}</text>
+        <text class="ad-exception-note" wx:if="{{exception.note}}">补充：{{exception.note}}</text>
+        <text class="ad-exception-note" wx:if="{{exception.resolution}}">处理：{{exception.resolution}}</text>
+      </view>
+    </view>
+
+    <view class="ad-section">
+      <view class="admin-section-head">
+        <text class="admin-section-title">状态记录</text>
+      </view>
+      <view class="ad-log" wx:for="{{logs}}" wx:key="key">
+        <view class="ad-log-dot"></view>
+        <view class="ad-log-body">
+          <text class="ad-log-status">{{item.statusText}}</text>
+          <text class="ad-log-time">{{item.timeText}} · {{item.actorText}}</text>
+          <text class="ad-log-note" wx:if="{{item.note}}">{{item.note}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="ad-actions">
+      <view
+        wx:if="{{canAdvance}}"
+        class="admin-btn admin-btn--primary {{acting ? 'admin-btn--disabled' : ''}}"
+        hover-class="admin-btn--pressed"
+        bindtap="onAdvance"
+      >{{order.status === 'pending' ? '确认接单' : '完成制作'}}</view>
+
+      <view class="ad-actions-sub">
+        <view class="admin-btn admin-btn--ghost ad-actions-half" wx:if="{{canCancel}}" bindtap="onOpenCancel" hover-class="admin-btn--pressed">取消订单</view>
+        <view class="admin-btn admin-btn--ghost ad-actions-half" wx:if="{{canMarkException}}" bindtap="onOpenException" hover-class="admin-btn--pressed">标记异常</view>
+        <view class="admin-btn admin-btn--ghost ad-actions-half" wx:if="{{canResolveException}}" bindtap="onOpenResolve" hover-class="admin-btn--pressed">处理异常</view>
+      </view>
+
+      <view class="ad-panel" wx:if="{{panel}}">
+        <text class="ad-panel-title">{{panelTitle}}</text>
+
+        <view class="ad-quick" wx:if="{{panel === 'exception'}}">
+          <view
+            class="ad-quick-item {{reason === item ? 'is-active' : ''}}"
+            wx:for="{{quickReasons}}"
+            wx:key="*this"
+            data-reason="{{item}}"
+            bindtap="onQuickReason"
+          >{{item}}</view>
+        </view>
+
+        <textarea
+          class="admin-textarea"
+          value="{{reason}}"
+          maxlength="{{reasonMax}}"
+          placeholder="{{panelPlaceholder}}"
+          placeholder-class="admin-input-placeholder"
+          bindinput="onReasonInput"
+        ></textarea>
+        <text class="admin-counter">{{reason.length}}/{{reasonMax}}</text>
+
+        <view class="ad-panel-actions">
+          <view class="admin-btn admin-btn--ghost ad-actions-half" bindtap="onClosePanel" hover-class="admin-btn--pressed">取消</view>
+          <view class="admin-btn admin-btn--primary ad-actions-half" bindtap="onSubmitPanel" hover-class="admin-btn--pressed">{{acting ? '提交中…' : panelConfirmText}}</view>
+        </view>
+      </view>
+
+      <text class="ad-back" bindtap="onBackToList">返回订单列表</text>
+    </view>
+  </view>
+
+  <admin-nav active="orders"></admin-nav>
+</view>
+
+<view class="loading" wx:if="{{loading}}">加载中…</view>
+
+<empty-state
+  wx:if="{{!loading && !order}}"
+  text="{{error || '订单不存在'}}"
+  hint="返回订单列表看看"
+></empty-state>

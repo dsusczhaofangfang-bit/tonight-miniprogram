@@ -1,0 +1,105 @@
+@import "../../styles/admin.wxss";
+
+.ao-summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-top: 20rpx;
+}
+
+.ao-summary-title {
+  color: #C9A86E;
+  font-size: 24rpx;
+  letter-spacing: 3rpx;
+}
+
+.ao-summary-note {
+  color: rgba(160, 143, 126, 0.8);
+  font-size: 20rpx;
+  letter-spacing: 1rpx;
+}
+
+.ao-card {
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid rgba(201, 168, 110, 0.14);
+}
+
+.ao-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ao-no {
+  color: #F4ECDF;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 27rpx;
+  letter-spacing: 2rpx;
+}
+
+.ao-body {
+  margin-top: 12rpx;
+}
+
+.ao-table-row {
+  display: flex;
+  align-items: baseline;
+}
+
+.ao-table {
+  color: #F4ECDF;
+  font-size: 34rpx;
+  letter-spacing: 2rpx;
+}
+
+.ao-area {
+  margin-left: 12rpx;
+  color: #A08F7E;
+  font-size: 20rpx;
+  letter-spacing: 1rpx;
+}
+
+.ao-time {
+  margin-left: auto;
+  color: #A08F7E;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20rpx;
+}
+
+.ao-items {
+  display: block;
+  margin-top: 8rpx;
+  overflow: hidden;
+  color: rgba(244, 236, 223, 0.9);
+  font-size: 24rpx;
+  line-height: 1.5;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ao-foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: 12rpx;
+}
+
+.ao-qty {
+  color: #A08F7E;
+  font-size: 21rpx;
+  letter-spacing: 1rpx;
+}
+
+.ao-amount {
+  font-size: 30rpx;
+}
+
+.ao-exception {
+  display: block;
+  margin-top: 10rpx;
+  padding-left: 14rpx;
+  border-left: 4rpx solid #A32B41;
+  color: #D08A93;
+  font-size: 21rpx;
+  line-height: 1.5;
+}

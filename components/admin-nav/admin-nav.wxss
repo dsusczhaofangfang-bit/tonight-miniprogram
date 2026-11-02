@@ -1,0 +1,39 @@
+/* 管理端底栏（组件样式隔离，不继承页面类） */
+.admin-nav {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 30;
+  display: flex;
+  height: 104rpx;
+  padding-bottom: env(safe-area-inset-bottom);
+  border-top: 1rpx solid rgba(201, 168, 110, 0.25);
+  background: #14100D;
+}
+
+.admin-nav-item {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-nav-text {
+  color: #A08F7E;
+  font-size: 24rpx;
+  letter-spacing: 3rpx;
+}
+
+.admin-nav-item.is-active .admin-nav-text {
+  color: #D9A45B;
+}
+
+.admin-nav-item.is-active::after {
+  content: '';
+  width: 32rpx;
+  height: 4rpx;
+  margin-top: 8rpx;
+  background: #A32B41;
+}
