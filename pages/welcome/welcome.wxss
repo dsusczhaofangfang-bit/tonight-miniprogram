@@ -22,10 +22,10 @@
   z-index: 2;
   padding: 20rpx 28rpx;
   color: #B58A53;
-  font-size: 22rpx;
+  font-size: 26rpx;
   line-height: 1;
-  letter-spacing: 4rpx;
-  text-indent: 4rpx;
+  letter-spacing: 5rpx;
+  text-indent: 5rpx;
   animation: fade 420ms ease-out 0.6s both;
 }
 
@@ -50,20 +50,20 @@
 
 .brand-cn {
   color: #E8D9BE;
-  font-size: 104rpx;
+  font-size: 120rpx;
   line-height: 1.15;
-  letter-spacing: 14rpx;
-  text-indent: 14rpx;
+  letter-spacing: 16rpx;
+  text-indent: 16rpx;
   animation: fade 520ms ease-out 0.1s both;
 }
 
 .brand-en {
   margin-top: 34rpx;
   color: #B58A53;
-  font-size: 19rpx;
+  font-size: 22rpx;
   line-height: 1.4;
-  letter-spacing: 8rpx;
-  text-indent: 8rpx;
+  letter-spacing: 9rpx;
+  text-indent: 9rpx;
   animation: fade 520ms ease-out 0.24s both;
 }
 
@@ -76,30 +76,30 @@
 
 .greeting-cn {
   color: #E8D9BE;
-  font-size: 32rpx;
+  font-size: 37rpx;
   line-height: 1.6;
-  letter-spacing: 5rpx;
-  text-indent: 5rpx;
+  letter-spacing: 6rpx;
+  text-indent: 6rpx;
   animation: fade 520ms ease-out 0.4s both;
 }
 
 .greeting-sub {
   margin-top: 26rpx;
   color: #B58A53;
-  font-size: 24rpx;
+  font-size: 28rpx;
   line-height: 1.6;
-  letter-spacing: 4rpx;
-  text-indent: 4rpx;
+  letter-spacing: 5rpx;
+  text-indent: 5rpx;
   animation: fade 520ms ease-out 0.52s both;
 }
 
 .greeting-en {
   margin-top: 48rpx;
   color: #B58A53;
-  font-size: 17rpx;
+  font-size: 20rpx;
   line-height: 1.6;
-  letter-spacing: 6rpx;
-  text-indent: 6rpx;
+  letter-spacing: 7rpx;
+  text-indent: 7rpx;
   animation: fade 520ms ease-out 0.62s both;
 }
 
@@ -114,9 +114,9 @@
   display: inline-block;
   padding: 24rpx 40rpx;
   color: #E8D9BE;
-  font-size: 28rpx;
+  font-size: 32rpx;
   line-height: 1;
-  letter-spacing: 18rpx;
+  letter-spacing: 20rpx;
   text-indent: 18rpx;
   animation: fade 520ms ease-out 0.85s both;
 }
