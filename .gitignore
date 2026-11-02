@@ -28,8 +28,10 @@ __pycache__/
 .env
 .env.*
 !.env.example
+
 # 开发工具/依赖（体积大、可重装，不入库）
 .tools/
+.pylib/
 
 # 用户提供的字体（7.4 MB，体积过大不入库；路径与校验值见 docs/08）
 HakkouMincho-v1.004/

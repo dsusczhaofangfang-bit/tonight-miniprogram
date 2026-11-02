@@ -1,4 +1,4 @@
-const SKIP_READY_MS = 800;
+const SKIP_READY_MS = 600;
 const ENTER_READY_MS = 900;
 
 Page({

@@ -1,17 +1,20 @@
 <view class="welcome">
-  <view class="welcome-brand">
-    <text class="brand-cn">柠舍唔同</text>
-    <text class="brand-en">COCKTAIL &amp; WHISKEY BAR</text>
-    <view class="brand-rule" aria-hidden="true"></view>
-    <view class="welcome-copy">
-      <text>今夜，来点不一样的。</text>
-      <text>欢迎来到柠舍唔同。</text>
+  <view class="skip" hover-class="skip--pressed" bindtap="onSkip">跳过</view>
+
+  <view class="stage">
+    <view class="brand">
+      <text class="brand-cn">柠舍唔同</text>
+      <text class="brand-en">COCKTAIL &amp; WHISKEY BAR</text>
+    </view>
+
+    <view class="greeting">
+      <text class="greeting-cn">今夜，来点不一样的。</text>
+      <text class="greeting-sub">欢迎来到柠舍唔同。</text>
+      <text class="greeting-en">A DIFFERENT KIND OF NIGHT.</text>
     </view>
   </view>
 
-  <view class="skip" hover-class="skip--pressed" bindtap="onSkip">跳过</view>
-
-  <view class="welcome-actions">
-    <button class="enter-btn" hover-class="enter-btn--pressed" bindtap="onEnter">进入酒馆</button>
+  <view class="footer">
+    <view class="enter" hover-class="enter--pressed" bindtap="onEnter">进入酒馆</view>
   </view>
 </view>
