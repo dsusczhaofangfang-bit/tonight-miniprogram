@@ -10,6 +10,11 @@ const STORAGE_KEYS = {
   TABLES: 'lm_tables',
   TABLE: 'lm_table',
   SEEN_WELCOME: 'lm_seen_welcome',
+  // 调酒师会话与老板会话分开存：同一台设备可同时保持两种身份
+  BARTENDER_SESSION: 'lm_bartender_session',
+  // 调酒师工作台的本地偏好：声音开关、上次查看订单的时间（用于「新」角标）
+  BARTENDER_SOUND: 'lm_bartender_sound',
+  BARTENDER_SEEN_AT: 'lm_bartender_seen_at',
   // 种子版本：用于判断本地缓存是否需要用新的 mock-data 重建
   SEED_CATEGORIES: 'lm_seed_categories',
   SEED_PRODUCTS: 'lm_seed_products',
@@ -49,6 +54,14 @@ const ORDER_STATUS_LIST = [
   { value: 'cancelled', text: '已取消' }
 ];
 
+// 调酒师工作台只看待接单/制作中/已完成。已取消仍留在老板端与顾客端可查，
+// 不进工作台，避免调酒师误删/误处理取消单。
+const WORKBENCH_STATUS_LIST = [
+  { value: 'pending', text: '待接单' },
+  { value: 'making', text: '制作中' },
+  { value: 'completed', text: '已完成' }
+];
+
 // 状态机：只能前进，不可回退；顾客侧只在「待接单」可取消
 const ORDER_TRANSITIONS = {
   pending: ['making', 'cancelled'],
@@ -62,6 +75,7 @@ const ORDER_TRANSITIONS = {
 const ORDER_LOG_ACTOR = {
   customer: '顾客',
   owner: '老板',
+  bartender: '调酒师',
   admin: '店员',
   demo: '演示',
   system: '系统'
@@ -103,6 +117,7 @@ module.exports = {
   ORDER_STATUS_TEXT,
   ORDER_STATUS_TONE,
   ORDER_STATUS_LIST,
+  WORKBENCH_STATUS_LIST,
   ORDER_TRANSITIONS,
   ORDER_LOG_ACTOR,
   EXCEPTION_STATUS,

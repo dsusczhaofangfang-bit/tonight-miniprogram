@@ -18,8 +18,17 @@
       <text class="entry-value entry-owner" wx:if="{{isOwner}}">{{ownerText}}</text>
       <text class="entry-value" wx:else>需口令</text>
     </view>
+    <view class="entry-item" bindtap="onBartenderTap">
+      <text class="entry-label">调酒师工作台</text>
+      <text class="entry-value entry-staff" wx:if="{{isBartender}}">{{bartenderText}}</text>
+      <text class="entry-value" wx:else>需口令</text>
+    </view>
     <view class="entry-item" wx:if="{{isOwner}}" bindtap="onLogout">
       <text class="entry-label">退出管理后台</text>
+      <text class="entry-value">退出</text>
+    </view>
+    <view class="entry-item" wx:if="{{isBartender}}" bindtap="onBartenderLogout">
+      <text class="entry-label">退出调酒师工作台</text>
       <text class="entry-value">退出</text>
     </view>
     <view class="entry-item" bindtap="onAboutTap">

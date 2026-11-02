@@ -79,6 +79,12 @@
   letter-spacing: 1rpx;
 }
 
+/* 已登录调酒师：同样用金色，但文案标识角色不同 */
+.entry-staff {
+  color: #D9A45B;
+  letter-spacing: 1rpx;
+}
+
 .my-footer {
   margin-top: 64rpx;
   color: rgba(160, 143, 126, 0.6);

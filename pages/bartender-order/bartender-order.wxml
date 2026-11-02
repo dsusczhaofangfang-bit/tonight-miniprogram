@@ -1,0 +1,123 @@
+<view class="bt-page bt-detail">
+  <view class="bt-top">
+    <view class="bt-brand-block">
+      <text class="bt-brand">柠舍唔同</text>
+      <text class="bt-sub">调酒师工作台 · 订单详情</text>
+    </view>
+    <view class="bt-top-actions">
+      <text class="bt-link" bindtap="onBack">返回</text>
+      <text class="bt-link" bindtap="onLogout">退出</text>
+    </view>
+  </view>
+
+  <view class="bt-loading" wx:if="{{loading}}">加载中…</view>
+
+  <view class="bt-detail-error" wx:if="{{error}}">
+    <text>{{error}}</text>
+    <text class="bt-detail-error-back" bindtap="onBack">返回工作台</text>
+  </view>
+
+  <block wx:if="{{order && !loading}}">
+    <view class="bt-summary">
+      <view class="bt-summary-head">
+        <text class="bt-summary-table">{{tableText}}</text>
+        <status-tag status="{{order.status}}" />
+      </view>
+      <view class="bt-summary-meta">
+        <text>{{orderNo}}</text>
+        <text>下单 {{timeText}}</text>
+        <text>共 {{totalQty}} 件</text>
+      </view>
+      <view class="bt-exception-line" wx:if="{{exceptionText}}">异常：{{exceptionText}}</view>
+    </view>
+
+    <view class="bt-section">
+      <view class="bt-section-head">
+        <text class="bt-section-title">商品</text>
+        <text class="bt-section-note">共 {{totalQty}} 件</text>
+      </view>
+      <view class="bt-detail-item" wx:for="{{items}}" wx:key="productId">
+        <view class="bt-detail-item-main">
+          <text class="bt-detail-name">{{item.name}}</text>
+          <text class="bt-detail-name-en" wx:if="{{item.nameEn}}">{{item.nameEn}}</text>
+        </view>
+        <text class="bt-detail-qty">×{{item.qty}}</text>
+      </view>
+    </view>
+
+    <view class="bt-section">
+      <view class="bt-section-head">
+        <text class="bt-section-title">制作要求 / 备注</text>
+      </view>
+      <view class="bt-detail-remark" wx:if="{{remark}}">{{remark}}</view>
+      <text class="bt-section-empty" wx:else>顾客未填写备注</text>
+    </view>
+
+    <view class="bt-section" wx:if="{{exception}}">
+      <view class="bt-section-head">
+        <text class="bt-section-title">异常说明</text>
+        <text class="bt-section-note">{{exception.status === 'open' ? '等待老板处理' : '老板已处理'}}</text>
+      </view>
+      <view class="bt-detail-remark bt-detail-remark--warn">{{exceptionText}}</view>
+      <text class="bt-section-empty">由{{exceptionByText}}于 {{exceptionTimeText}} 提交</text>
+      <text class="bt-section-empty" wx:if="{{exception.status === 'resolved'}}">处理：{{exception.resolution}}</text>
+    </view>
+
+    <view class="bt-section" wx:if="{{canSubmitException}}">
+      <view class="bt-action bt-action--ghost" bindtap="onOpenException">提交异常说明（通知老板）</view>
+    </view>
+
+    <view class="bt-section">
+      <view class="bt-section-head">
+        <text class="bt-section-title">状态记录</text>
+      </view>
+      <view class="bt-log" wx:for="{{logs}}" wx:key="key">
+        <view class="bt-log-head">
+          <text class="bt-log-status">{{item.statusText}}</text>
+          <text class="bt-log-time">{{item.timeText}}</text>
+        </view>
+        <text class="bt-log-actor">{{item.actorText}}</text>
+        <text class="bt-log-note" wx:if="{{item.note}}">{{item.note}}</text>
+      </view>
+    </view>
+  </block>
+
+  <view class="bt-detail-actions" wx:if="{{order && !loading}}">
+    <view class="bt-action bt-action--ghost bt-detail-back" bindtap="onBack">返回工作台</view>
+    <view
+      class="bt-action bt-action--primary bt-detail-primary {{acting ? 'is-disabled' : ''}}"
+      wx:if="{{canAdvance}}"
+      bindtap="onAdvance"
+    >{{nextActionText}}</view>
+    <view class="bt-detail-done" wx:else>该订单已结束</view>
+  </view>
+
+  <view class="bt-panel-mask" wx:if="{{panel}}" bindtap="onClosePanel">
+    <view class="bt-panel" catchtap="noop">
+      <text class="bt-panel-title">提交异常说明</text>
+      <text class="bt-panel-desc">异常会通知老板处理，订单状态不变。调酒师不能取消订单。</text>
+      <view class="bt-quick">
+        <view
+          class="bt-quick-item {{reason === item ? 'is-active' : ''}}"
+          wx:for="{{quickReasons}}"
+          wx:key="*this"
+          data-reason="{{item}}"
+          bindtap="onQuickReason"
+        >{{item}}</view>
+      </view>
+      <textarea
+        class="bt-textarea"
+        value="{{reason}}"
+        maxlength="{{reasonMax}}"
+        placeholder="补充说明，例如哪一款缺货、需要多久"
+        placeholder-class="bt-textarea-ph"
+        bindinput="onReasonInput"
+      />
+      <text class="bt-counter">{{reason.length}}/{{reasonMax}}</text>
+      <view class="bt-panel-actions">
+        <view class="bt-action bt-action--ghost" bindtap="onClosePanel">取消</view>
+        <view class="bt-action bt-action--primary" bindtap="onSubmitException">提交给老板</view>
+      </view>
+    </view>
+  </view>
+</view>

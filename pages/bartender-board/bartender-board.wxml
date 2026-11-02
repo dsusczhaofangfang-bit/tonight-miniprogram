@@ -1,0 +1,128 @@
+<view class="bt-page">
+  <view class="bt-top">
+    <view class="bt-brand-block">
+      <text class="bt-brand">柠舍唔同</text>
+      <text class="bt-sub">调酒师工作台 · 演示</text>
+    </view>
+    <view class="bt-top-actions">
+      <text class="bt-link" bindtap="onBackToCustomer">顾客端</text>
+      <text class="bt-link" bindtap="onLogout">退出</text>
+    </view>
+  </view>
+
+  <view class="bt-meta">
+    <view class="bt-conn">
+      <view class="bt-dot {{online ? 'is-on' : 'is-off'}}"></view>
+      <text class="bt-conn-text">{{online ? '在线' : '离线'}}</text>
+    </view>
+    <text class="bt-meta-text">模拟实时 · {{intervalText}}轮询</text>
+    <text class="bt-meta-text">更新 {{lastUpdatedText}}</text>
+  </view>
+
+  <view class="bt-alert" wx:if="{{newCount > 0}}" bindtap="onNewBannerTap">
+    <text class="bt-alert-main">新订单 {{newCount}} 单</text>
+    <text class="bt-alert-hint">点击查看待接单</text>
+  </view>
+
+  <view class="bt-tools">
+    <view class="bt-sound">
+      <text class="bt-sound-label">提示音</text>
+      <switch class="bt-switch" checked="{{soundOn}}" color="#D9A45B" bindchange="onSoundChange" />
+    </view>
+    <text class="bt-sort" bindtap="onToggleSort">排序：{{sortText}}</text>
+  </view>
+
+  <scroll-view scroll-x class="bt-chip-scroll">
+    <view class="bt-chip-bar">
+      <view
+        wx:for="{{filters}}"
+        wx:key="value"
+        class="bt-chip {{item.value === activeStatus ? 'is-active' : ''}}"
+        data-status="{{item.value}}"
+        bindtap="onFilterTap"
+      >
+        <text>{{item.text}}</text>
+        <text class="bt-chip-count">{{item.count}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="bt-search">
+    <input
+      class="bt-search-input"
+      type="text"
+      value="{{keyword}}"
+      placeholder="按桌号搜索，如 A1"
+      placeholder-class="bt-search-ph"
+      confirm-type="search"
+      bindinput="onKeywordInput"
+      bindconfirm="onSearchConfirm"
+    />
+    <text class="bt-search-clear" wx:if="{{keyword}}" bindtap="onClearKeyword">清除</text>
+  </view>
+
+  <view class="bt-list" wx:if="{{orders.length}}">
+    <view
+      class="bt-card {{item.isNew ? 'is-new' : ''}}"
+      wx:for="{{orders}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onOrderTap"
+    >
+      <view class="bt-card-head">
+        <view class="bt-table">
+          <text class="bt-table-name">{{item.tableName}}</text>
+          <text class="bt-table-area" wx:if="{{item.tableArea}}">{{item.tableArea}}</text>
+        </view>
+        <view class="bt-card-tags">
+          <text class="bt-new" wx:if="{{item.isNew}}">新</text>
+          <status-tag status="{{item.status}}" />
+        </view>
+      </view>
+
+      <view class="bt-card-meta">
+        <text>{{item.orderNo}}</text>
+        <text>{{item.timeText}}</text>
+        <text>共 {{item.totalQty}} 件</text>
+      </view>
+
+      <view class="bt-items">
+        <view class="bt-item" wx:for="{{item.items}}" wx:for-item="dish" wx:key="productId">
+          <text class="bt-item-name">{{dish.name}}</text>
+          <text class="bt-item-qty">×{{dish.qty}}</text>
+        </view>
+      </view>
+
+      <view class="bt-remark" wx:if="{{item.remark}}">
+        <text class="bt-remark-label">备注</text>
+        <text class="bt-remark-text">{{item.remark}}</text>
+      </view>
+
+      <view class="bt-exception" wx:if="{{item.exceptionText}}">{{item.exceptionText}}</view>
+
+      <view class="bt-card-actions">
+        <view
+          class="bt-action bt-action--primary"
+          wx:if="{{item.actionText}}"
+          data-id="{{item.id}}"
+          data-next="{{item.actionNext}}"
+          data-status="{{item.status}}"
+          catchtap="onQuickAction"
+        >{{item.actionText}}</view>
+        <view class="bt-action" data-id="{{item.id}}" catchtap="onOrderTap">详情</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="bt-empty" wx:if="{{!loading && !orders.length}}">
+    <text class="bt-empty-title">{{activeStatus === 'pending' ? '暂无新订单' : '该状态暂无订单'}}</text>
+    <text class="bt-empty-text">顾客下单后会自动出现在这里（演示阶段为本地轮询，每 {{intervalText}}刷新一次）</text>
+  </view>
+
+  <view class="bt-loading" wx:if="{{loading && !orders.length}}">加载中…</view>
+
+  <view class="bt-foot">
+    <text>订单与顾客端、老板端共用同一份数据，状态更新后三端同步。</text>
+    <text>演示阶段为本地轮询（{{intervalText}}），不是真实网络推送；正式版将由云端订阅替代。</text>
+  </view>
+</view>

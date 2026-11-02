@@ -256,9 +256,10 @@ async function main() {
     assert.strictEqual(store.get(STORAGE_KEYS.ADMIN_SESSION), undefined);
   });
 
-  await check('调酒师角色暂未开放（本阶段只做老板端）', async () => {
+  await check('调酒师角色已开放，但老板口令不能冒充调酒师', async () => {
     const res = await authService.login('8888', authService.ROLES.BARTENDER);
-    assert.strictEqual(res.code, 4031);
+    assert.strictEqual(res.code, 4002);
+    assert.strictEqual(store.get(STORAGE_KEYS.BARTENDER_SESSION), undefined);
   });
 
   await check('正确口令登录：role=owner、mock=true、写入会话', async () => {

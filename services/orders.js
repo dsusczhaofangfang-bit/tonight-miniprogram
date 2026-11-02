@@ -351,13 +351,28 @@ function markMockPaid(orderId) {
   return api.success(api.clone(order));
 }
 
-// 状态流转：待接单 → 制作中 → 已完成；页面只调用这里，不直接改数据
-function updateOrderStatus(orderId, nextStatus, by = 'admin') {
+// 状态流转：待接单 → 制作中 → 已完成；页面只调用这里，不直接改数据。
+// expectedStatus 为乐观锁：页面带上看到的状态，若已被别端改过则拒绝，
+// 避免调酒师「制作完成」覆盖顾客刚提交的取消。
+function updateOrderStatus(orderId, nextStatus, by = 'admin', expectedStatus = '') {
   const list = loadAll();
   const index = list.findIndex((item) => item.id === orderId);
   if (index < 0) return api.fail(4040, '订单不存在');
 
   const order = list[index];
+
+  if (expectedStatus && order.status !== expectedStatus) {
+    return api.fail(4017, '订单状态已变化，请刷新后重试');
+  }
+
+  // 调酒师只能往前推单，不能取消、不能改商品；取消与异常处理归老板
+  if (by === 'bartender' && nextStatus === ORDER_STATUS.CANCELLED) {
+    return api.fail(4018, '调酒师不能取消订单，请提交异常说明');
+  }
+  if (by === 'customer') {
+    return api.fail(4019, '顾客不能推进订单状态');
+  }
+
   const allowed = ORDER_TRANSITIONS[order.status] || [];
   if (allowed.indexOf(nextStatus) < 0) {
     return api.fail(4006, '订单状态不可变更');
@@ -383,6 +398,7 @@ function cancelOrder(orderId, options = {}) {
   if (order.status === ORDER_STATUS.COMPLETED) return api.fail(4009, '订单已完成，无法取消');
 
   const by = options.by || 'customer';
+  if (by === 'bartender') return api.fail(4021, '调酒师不能取消订单，请提交异常说明');
   const isOwner = by === 'owner' || by === 'admin';
   const allowed = isOwner ? [ORDER_STATUS.PENDING, ORDER_STATUS.MAKING] : [ORDER_STATUS.PENDING];
   if (allowed.indexOf(order.status) < 0) {
@@ -456,6 +472,7 @@ function markOrderException(orderId, options = {}) {
 function resolveOrderException(orderId, options = {}) {
   const resolution = String(options.resolution || options.note || '').trim().slice(0, REMARK_MAX);
   if (!resolution) return api.fail(4015, '请填写处理说明');
+  if (options.by === 'bartender') return api.fail(4020, '异常由老板处理，调酒师只能提交说明');
 
   const list = loadAll();
   const index = list.findIndex((item) => item.id === orderId);
@@ -489,6 +506,61 @@ function listOrders(filter = {}) {
   let list = loadAll().slice().sort((a, b) => b.createdAt - a.createdAt);
   if (status) list = list.filter((item) => item.status === status);
   return api.success(api.clone(list));
+}
+
+// 调酒师工作台：只看未取消的订单（待接单/制作中/已完成），支持状态、桌号关键词与时间排序。
+// 与顾客端/老板端读同一份 orders 数据，不另存副本；工作台不暴露已取消单。
+const WORKBENCH_STATUSES = [ORDER_STATUS.PENDING, ORDER_STATUS.MAKING, ORDER_STATUS.COMPLETED];
+
+function listWorkbenchOrders(filter = {}) {
+  const status = filter.status || '';
+  // 工作台不接受「已取消」等状态：传了非法状态就返回空，避免悄悄退化成全量
+  if (status && WORKBENCH_STATUSES.indexOf(status) < 0) {
+    return api.success({ list: [], total: 0, page: 1, pageSize: 0 });
+  }
+  const keyword = String(filter.keyword || '').trim().toLowerCase();
+  // asc = 先到先做（默认）；desc = 最新下单在前
+  const direction = filter.sort === 'desc' ? -1 : 1;
+  const page = Math.max(1, parseInt(filter.page, 10) || 1);
+  const pageSize = Math.max(1, parseInt(filter.pageSize, 10) || 100);
+
+  let list = loadAll().filter((item) => item.status !== ORDER_STATUS.CANCELLED);
+
+  if (status) list = list.filter((item) => item.status === status);
+  if (keyword) {
+    list = list.filter((item) =>
+      `${item.tableName || ''} ${item.tableArea || ''} ${item.tableId || ''} ${item.orderNo || ''}`
+        .toLowerCase()
+        .indexOf(keyword) >= 0
+    );
+  }
+
+  list.sort((a, b) => (a.createdAt - b.createdAt) * direction);
+
+  const total = list.length;
+  const start = (page - 1) * pageSize;
+  return api.success({
+    list: api.clone(list.slice(start, start + pageSize)),
+    total,
+    page,
+    pageSize
+  });
+}
+
+// 待接单轻量列表：工作台轮询用它做「新单」识别，不受当前筛选 tab 影响。
+// 只返回识别所需字段，避免每次轮询搬运整单明细。
+function listPendingOrders() {
+  const list = loadAll()
+    .filter((item) => item.status === ORDER_STATUS.PENDING)
+    .sort((a, b) => a.createdAt - b.createdAt)
+    .map((item) => ({
+      id: item.id,
+      orderNo: item.orderNo,
+      tableName: item.tableName,
+      createdAt: item.createdAt
+    }));
+
+  return api.success(list);
 }
 
 function adminListOrders(filter = {}) {
@@ -547,6 +619,8 @@ module.exports = {
   resolveOrderException,
   getOrder,
   listOrders,
+  listWorkbenchOrders,
+  listPendingOrders,
   adminListOrders,
   adminOrderCounts
 };

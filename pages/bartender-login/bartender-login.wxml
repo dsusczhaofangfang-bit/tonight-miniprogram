@@ -1,0 +1,50 @@
+<view class="bt-login">
+  <view class="bt-login-head">
+    <text class="bt-login-kicker">STAFF · BAR</text>
+    <text class="bt-login-brand">柠舍唔同</text>
+    <text class="bt-login-sub">COCKTAIL &amp; WHISKEY BAR</text>
+  </view>
+
+  <view class="bt-login-main">
+    <view class="bt-login-title-row">
+      <text class="bt-login-title">调酒师工作台</text>
+      <text class="bt-login-tag">演示鉴权</text>
+    </view>
+
+    <text class="bt-login-desc">处理待接单与制作中的订单：接单、出品、提交异常。不能改价、上下架商品或查看营业额。</text>
+
+    <view class="bt-login-field">
+      <text class="bt-login-label">工作台口令</text>
+      <input
+        class="bt-login-input"
+        type="text"
+        password="{{true}}"
+        maxlength="8"
+        value="{{password}}"
+        placeholder="请输入口令"
+        placeholder-class="bt-login-ph"
+        confirm-type="done"
+        bindinput="onPasswordInput"
+        bindconfirm="onSubmit"
+      />
+    </view>
+
+    <view class="bt-login-error" wx:if="{{error}}">{{error}}</view>
+
+    <view class="bt-login-btn {{submitting ? 'is-disabled' : ''}}" bindtap="onSubmit">
+      <text>{{submitting ? '登录中…' : '进入工作台'}}</text>
+    </view>
+
+    <text class="bt-login-hint">演示口令：{{demoPassword}}（仅演示环境使用）</text>
+
+    <view class="bt-login-note">
+      <text class="bt-login-note-title">权限边界（Mock）</text>
+      <text class="bt-login-note-text">
+        调酒师只能读订单、推进制作状态、提交异常说明；取消订单与处理异常由老板完成。
+        口令与角色判断都在本地，正式版必须由云函数校验身份，前端拦截不构成安全边界。
+      </text>
+    </view>
+  </view>
+
+  <text class="bt-login-back" bindtap="onBack">返回顾客端</text>
+</view>

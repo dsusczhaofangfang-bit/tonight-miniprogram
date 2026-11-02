@@ -15,7 +15,10 @@
     "pages/admin-orders/admin-orders",
     "pages/admin-order-detail/admin-order-detail",
     "pages/admin-products/admin-products",
-    "pages/admin-product-edit/admin-product-edit"
+    "pages/admin-product-edit/admin-product-edit",
+    "pages/bartender-login/bartender-login",
+    "pages/bartender-board/bartender-board",
+    "pages/bartender-order/bartender-order"
   ],
   "window": {
     "navigationBarBackgroundColor": "#0B0A09",

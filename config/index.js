@@ -8,7 +8,11 @@ module.exports = {
   demoAdminPassword: '8888',
   // 老板管理端口令（演示）。与 demoAdminPassword 分开，便于以后区分店主/调酒师
   demoOwnerPassword: '8888',
+  // 调酒师工作台口令（演示）。与老板口令分开，Mock 阶段仅用于演示角色隔离
+  demoBartenderPassword: '1234',
   demoMode: true,
+  // 调酒师工作台「模拟实时」轮询间隔（毫秒）。M4 接 CloudBase 后改为订阅，不再轮询
+  orderFeedIntervalMs: 5000,
   // 本地示例数据版本：改动 utils/mock-data 里的分类或商品后递增，
   // 客户端会在下次启动时自动重建缓存，不需要手动「重置演示数据」
   seedVersion: '2026-11-02-menu-v1',

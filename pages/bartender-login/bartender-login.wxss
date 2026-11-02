@@ -1,0 +1,162 @@
+/* 调酒师登录：沿用深色酒馆底色，但比老板后台更「工作牌」——左对齐、密集、无装饰。 */
+page {
+  background: #0B0A09;
+}
+
+.bt-login {
+  min-height: 100vh;
+  padding: 88rpx 44rpx calc(60rpx + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+
+.bt-login-head {
+  padding-bottom: 28rpx;
+  border-bottom: 1rpx solid rgba(201, 168, 110, 0.25);
+}
+
+.bt-login-kicker {
+  display: block;
+  color: rgba(217, 164, 91, 0.85);
+  font-size: 18rpx;
+  letter-spacing: 6rpx;
+}
+
+.bt-login-brand {
+  display: block;
+  margin-top: 14rpx;
+  color: #F4ECDF;
+  font-size: 46rpx;
+  letter-spacing: 9rpx;
+}
+
+.bt-login-sub {
+  display: block;
+  margin-top: 8rpx;
+  color: #A08F7E;
+  font-size: 19rpx;
+  letter-spacing: 3rpx;
+}
+
+.bt-login-main {
+  padding-top: 40rpx;
+}
+
+.bt-login-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bt-login-title {
+  color: #D9A45B;
+  font-size: 34rpx;
+  letter-spacing: 4rpx;
+}
+
+.bt-login-tag {
+  padding: 4rpx 12rpx;
+  border: 1rpx solid rgba(217, 164, 91, 0.45);
+  color: #D9A45B;
+  font-size: 18rpx;
+  letter-spacing: 2rpx;
+}
+
+.bt-login-desc {
+  display: block;
+  margin-top: 14rpx;
+  color: rgba(160, 143, 126, 0.92);
+  font-size: 22rpx;
+  line-height: 1.75;
+}
+
+.bt-login-field {
+  margin-top: 40rpx;
+  padding-bottom: 14rpx;
+  border-bottom: 1rpx solid rgba(201, 168, 110, 0.3);
+}
+
+.bt-login-label {
+  display: block;
+  color: #A08F7E;
+  font-size: 21rpx;
+  letter-spacing: 2rpx;
+}
+
+.bt-login-input {
+  height: 88rpx;
+  color: #F4ECDF;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 42rpx;
+  letter-spacing: 12rpx;
+}
+
+.bt-login-ph {
+  color: rgba(160, 143, 126, 0.45);
+  font-size: 26rpx;
+  letter-spacing: 2rpx;
+}
+
+.bt-login-error {
+  margin-top: 18rpx;
+  padding: 12rpx 14rpx;
+  border-left: 4rpx solid #A32B41;
+  background: rgba(163, 43, 65, 0.1);
+  color: #D9A45B;
+  font-size: 22rpx;
+}
+
+.bt-login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 92rpx;
+  margin-top: 38rpx;
+  border: 1rpx solid rgba(217, 164, 91, 0.55);
+  background: rgba(217, 164, 91, 0.12);
+  color: #F4ECDF;
+  font-size: 30rpx;
+  letter-spacing: 6rpx;
+}
+
+.bt-login-btn.is-disabled {
+  opacity: 0.5;
+}
+
+.bt-login-hint {
+  display: block;
+  margin-top: 18rpx;
+  color: rgba(160, 143, 126, 0.85);
+  font-size: 21rpx;
+  text-align: center;
+}
+
+.bt-login-note {
+  margin-top: 46rpx;
+  padding: 22rpx 24rpx;
+  border: 1rpx solid rgba(201, 168, 110, 0.16);
+  background: #17110D;
+}
+
+.bt-login-note-title {
+  display: block;
+  color: #C9A86E;
+  font-size: 22rpx;
+  letter-spacing: 2rpx;
+}
+
+.bt-login-note-text {
+  display: block;
+  margin-top: 10rpx;
+  color: rgba(160, 143, 126, 0.9);
+  font-size: 21rpx;
+  line-height: 1.75;
+}
+
+.bt-login-back {
+  display: block;
+  margin-top: 44rpx;
+  color: #A08F7E;
+  font-size: 22rpx;
+  text-align: center;
+  letter-spacing: 2rpx;
+}
