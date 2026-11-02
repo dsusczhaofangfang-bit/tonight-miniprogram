@@ -2,8 +2,8 @@
 
 单体私人小酒馆微信小程序：品牌展示、到店扫码点单、模拟支付、老板管理后台。
 
-> **当前阶段：M0、首页、酒单与商品详情（第二、三阶段）、订单确认与订单管理（第五阶段）、老板管理端（第六阶段）均已于 2026-11-02 验收；欢迎页已定稿冻结。**
-> 下一步：真机走查（iOS / Android）→ 调酒师工作台 / CloudBase / 支付（未排期）。
+> **当前阶段：M0、首页、酒单与商品详情（第二、三阶段）、订单确认与订单管理（第五阶段）、老板管理端（第六阶段）、调酒师工作台（第七阶段）均已于 2026-11-02 验收；欢迎页已定稿冻结。**
+> 下一步：真机走查（iOS / Android）→ CloudBase（M4）→ 真实支付（M5，未排期）。
 
 ## 快速开始
 
@@ -29,6 +29,7 @@
 | 订单详情 | 编号、时间、桌号、清单、金额、备注、状态时间线、取消 / 演示推进 |
 | 我的 | 从首页右上角进入；订单入口、**老板管理后台（需口令）**、开发自检（仅开发版） |
 | 老板管理后台 | 口令登录（演示 `8888`）→ 经营概览 / 订单管理 / 商品管理；独立底栏，不进顾客端 Tab |
+| 调酒师工作台 | 独立口令 `1234`；待接单/制作中/已完成、桌号搜索、时间排序、5 秒轮询提醒、提示音、接单/制作完成、异常提交 |
 | 开发自检 | 逐个检查 services 连通性、重置演示数据、调试桌号、老板后台直达 |
 
 ## M0 测试步骤
@@ -108,9 +109,22 @@
 10. 关闭小程序重开：登录态、商品改动、订单状态都还在。
 11. 命令行自检：`node scripts/verify_stage6.js`，应 46 项全部通过。
 
+## 调酒师工作台测试（第七阶段）
+
+> 完整步骤与文件清单见 [docs/12](docs/12-第七阶段交付说明.md) 第 4 节。演示口令 `1234`；状态仍为 4 态，**没有「待取餐」**。
+
+1. 我的 → 「调酒师工作台」→ 输入 `1234` → 进入工作台；顶部显示「在线」「模拟实时 · 5 秒轮询」「更新 HH:mm:ss」。
+2. 默认「待接单」，三个筛选带计数（无「全部」、无「已取消」）；用顾客端下单，5 秒内出现「新订单 N 单」提示条与「新」角标，并播放提示音。
+3. 关闭「提示音」后新单仍提醒但不出声；重开小程序开关保留。
+4. 卡片「接单」→ 顾客端「我的订单 → 制作中」同步；「制作完成」→ 两端都变「已完成」。
+5. 桌号搜索 `A1`、切换「先到先做 / 最新在前」；点卡片看详情（编号/桌号/时间/商品与数量/备注/状态记录）。
+6. 详情「提交异常说明」→ 选缺货并补充 → 老板端出现异常；老板处理后调酒师端显示已处理。调酒师不能取消订单。
+7. 调酒师直接打开老板页会被拦回老板登录页；`8888` 进不了调酒师端。
+8. 断网显示「离线」并暂停轮询，恢复后自动继续；命令行 `node scripts/verify_stage7.js` 应 56 项全过。
+
 ## 主包体积
 
-主包约 200 KB（其中 `styles/font-hakkou.wxss` 67.8 KB 是内嵌字体子集）。已排除：`docs/`、`scripts/`、`assets/_src`、`assets/rose`、`assets/petals`、`components/{rose-stage,petal-field,petal-layer}`、`HakkouMincho-v1.004/`（7.4 MB 原始字体，主包上限 2048 KB，不能整包引入）。
+主包约 225 KB（其中 `styles/font-hakkou.wxss` 67.8 KB 是内嵌字体子集，`assets/sounds/order-alert.wav` 20.7 KB 是提示音）。已排除：`docs/`、`scripts/`、`assets/_src`、`assets/rose`、`assets/petals`、`components/{rose-stage,petal-field,petal-layer}`、`HakkouMincho-v1.004/`（7.4 MB 原始字体，主包上限 2048 KB，不能整包引入）。
 
 ## 项目结构
 
@@ -134,23 +148,28 @@
 │  ├─ admin-orders/   # 订单管理（全部 + 状态筛选）
 │  ├─ admin-order-detail/ # 订单详情与处理（接单/完成/取消/异常）
 │  ├─ admin-products/ # 商品管理（筛选、搜索、上下架）
-│  └─ admin-product-edit/ # 商品新增/编辑（图片只读）
+│  ├─ admin-product-edit/ # 商品新增/编辑（图片只读）
+│  ├─ bartender-login/ # 调酒师登录（独立口令）
+│  ├─ bartender-board/ # 调酒师工作台（筛选/搜索/轮询/提醒）
+│  └─ bartender-order/ # 调酒师订单详情（接单/完成/异常）
 ├─ components/        # product-card / quantity-stepper / empty-state / status-tag
 │                     # admin-nav / label-block（管理端）
 │                     # rose-stage / petal-field / petal-layer（已废弃，不进包）
-├─ services/          # shop / categories / products / recommend / cart / tables / orders / auth / stats / media
+├─ services/          # shop / categories / products / recommend / cart / tables / orders / order-feed / auth / stats / media
 ├─ utils/
 │  ├─ mock-data/      # 分类、商品、桌号、店铺、推荐位种子数据
 │  ├─ storage.js      # wx.storage 封装
 │  ├─ format.js       # 金额（含 元→分 严格解析）、日期格式化
 │  ├─ admin-guard.js  # 管理页守卫
+│  ├─ bartender-guard.js # 调酒师页面守卫
 │  └─ constants.js    # 存储键、订单状态机、异常枚举
 ├─ assets/
 │  ├─ icons/          # tabBar 占位图标（scripts/gen_icons.py 生成）
+│  ├─ sounds/         # 调酒师新单提示音（scripts/gen_sound.py 生成）
 │  ├─ rose/ petals/   # 玫瑰素材（已废弃，不进包）
 │  └─ _src/           # 素材源图 + 字体子集 fonts/（不进包）
-├─ styles/            # theme.wxss + admin.wxss + font-hakkou.wxss（字体 base64，生成文件）
-├─ scripts/           # 开发辅助脚本（不进包）：build_font.py / verify_font.py 等
+├─ styles/            # theme.wxss + admin.wxss + bartender.wxss + font-hakkou.wxss（字体 base64，生成文件）
+├─ scripts/           # 开发辅助脚本（不进包）：build_font.py / verify_font.py / gen_sound.py / verify_stage*.js 等
 └─ docs/              # 项目文档（不进包）
 ```
 
@@ -168,6 +187,7 @@
 | [第三阶段交付说明](docs/09-第三阶段交付说明.md) | 酒单与商品详情：文件清单、测试步骤、未完成事项 |
 | [第五阶段交付说明](docs/10-第五阶段交付说明.md) | 订单确认与订单管理：文件清单、测试步骤、状态机与取舍 |
 | [第六阶段交付说明](docs/11-第六阶段交付说明.md) | 老板管理端：页面结构、权限边界、数据管理、测试步骤与结果 |
+| [第七阶段交付说明](docs/12-第七阶段交付说明.md) | 调酒师工作台：角色权限、轮询提醒、订单处理、测试步骤与结果 |
 | [AI 交接说明](docs/06-AI交接说明.md) | 新对话入口：当前提交、状态、必读顺序、下一步 |
 
 ## 开发约定
@@ -188,4 +208,5 @@ git log --oneline
 node scripts/verify_stage3.js   # 41 项
 node scripts/verify_stage5.js   # 53 项
 node scripts/verify_stage6.js   # 46 项
+node scripts/verify_stage7.js   # 56 项
 ```
