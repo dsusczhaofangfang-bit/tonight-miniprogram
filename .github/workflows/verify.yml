@@ -1,0 +1,46 @@
+name: Verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: 自检脚本（Node 22）
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 安装 Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 校验 JSON 配置可解析
+        run: |
+          for f in app.json sitemap.json project.config.json; do
+            node -e "JSON.parse(require('fs').readFileSync(process.argv[1], 'utf8'))" "$f"
+            echo "OK  $f"
+          done
+
+      - name: 酒单与商品详情（41 项）
+        run: node scripts/verify_stage3.js
+
+      - name: 订单流程（53 项）
+        run: node scripts/verify_stage5.js
+
+      - name: 老板管理端（46 项）
+        run: node scripts/verify_stage6.js
+
+      - name: 调酒师工作台（56 项）
+        run: node scripts/verify_stage7.js

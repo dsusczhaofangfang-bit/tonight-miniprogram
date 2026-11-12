@@ -19,7 +19,7 @@ module.exports = {
   // 桌号表的种子版本：改 utils/mock-data/tables.js 后递增，客户端下次启动自动重建
   tableSeedVersion: '2026-11-02-tables-v1',
   brand: {
-    name: '柠舍唔同',
+    name: 'Tonight',
     nameEn: 'COCKTAIL & WHISKEY BAR',
     slogan: '今夜，来点不一样的。'
   }

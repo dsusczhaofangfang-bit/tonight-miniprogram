@@ -12,6 +12,7 @@
 .login-brand {
   display: block;
   color: #F4ECDF;
+  font-family: Georgia, "Times New Roman", serif;
   font-size: 48rpx;
   letter-spacing: 10rpx;
 }

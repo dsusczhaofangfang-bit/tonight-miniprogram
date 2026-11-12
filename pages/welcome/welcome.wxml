@@ -3,13 +3,13 @@
 
   <view class="stage">
     <view class="brand">
-      <text class="brand-cn">柠舍唔同</text>
+      <text class="brand-cn">Tonight</text>
       <text class="brand-en">COCKTAIL &amp; WHISKEY BAR</text>
     </view>
 
     <view class="greeting">
       <text class="greeting-cn">今夜，来点不一样的。</text>
-      <text class="greeting-sub">欢迎来到柠舍唔同。</text>
+      <text class="greeting-sub">欢迎来到 <text class="greeting-brand">Tonight</text>。</text>
       <text class="greeting-en">A DIFFERENT KIND OF NIGHT.</text>
     </view>
   </view>

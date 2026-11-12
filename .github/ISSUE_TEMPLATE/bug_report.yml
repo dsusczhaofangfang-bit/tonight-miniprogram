@@ -1,0 +1,75 @@
+name: Bug 报告
+description: 报告一个可复现的问题（页面、数据、脚本均可）
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈。请先把「复现步骤」和「环境」填清楚，这两项缺失时很难定位。
+        如果是功能建议，请改用「功能建议」模板。
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 发生了什么
+      description: 期望结果 vs 实际结果
+      placeholder: |
+        期望：勾选商品后点「去结算」进入订单确认页
+        实际：提示「请先勾选商品」，但界面上是勾选状态
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      placeholder: |
+        1. 编译模式选择「扫码进入 · 桌号 A1」
+        2. 酒单加购任意两款
+        3. 进入购物车，点全选
+        4. 点「去结算」
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: 涉及模块
+      options:
+        - 顾客端（欢迎页/首页/酒单/详情/购物车/订单）
+        - 老板管理端
+        - 调酒师工作台
+        - 数据与金额计算
+        - 字体 / 视觉
+        - 自检脚本、CI 或工程配置（含文档）
+        - 不确定
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: 环境
+      description: 开发者工具版本、基础库版本、系统，真机问题请补机型
+      placeholder: 开发者工具 1.06.x / 基础库 3.17.6 / Windows 11 / iPhone 15
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 截图、录屏或控制台输出（可选）
+      description: 可直接粘贴图片；控制台日志请贴文本
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 我已搜索过现有 Issue，没有重复
+          required: true
+        - label: 我已在最新代码（main 分支）上复现
+          required: true

@@ -1,5 +1,6 @@
 const SKIP_READY_MS = 600;
-const ENTER_READY_MS = 900;
+// 与 welcome.wxss 中「进入酒馆」的 animation-delay（1.10s）对齐，留 50ms 余量
+const ENTER_READY_MS = 1150;
 
 Page({
   data: {},

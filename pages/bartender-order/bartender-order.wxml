@@ -1,7 +1,7 @@
 <view class="bt-page bt-detail">
   <view class="bt-top">
     <view class="bt-brand-block">
-      <text class="bt-brand">柠舍唔同</text>
+      <text class="bt-brand">Tonight</text>
       <text class="bt-sub">调酒师工作台 · 订单详情</text>
     </view>
     <view class="bt-top-actions">

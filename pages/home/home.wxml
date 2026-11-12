@@ -1,7 +1,7 @@
 <view class="home">
   <view class="topbar" style="padding-top: {{topInset}}px;">
     <view class="brand">
-      <text class="brand-cn">柠舍唔同</text>
+      <text class="brand-cn">Tonight</text>
       <text class="brand-en">COCKTAIL &amp; WHISKEY BAR</text>
     </view>
   </view>

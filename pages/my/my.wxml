@@ -32,7 +32,7 @@
       <text class="entry-value">退出</text>
     </view>
     <view class="entry-item" bindtap="onAboutTap">
-      <text class="entry-label">关于柠舍唔同</text>
+      <text class="entry-label">关于 Tonight</text>
       <text class="entry-value">→</text>
     </view>
     <view class="entry-item" wx:if="{{isDev}}" bindtap="onDevCheck">

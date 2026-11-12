@@ -25,6 +25,7 @@ page {
   display: block;
   margin-top: 14rpx;
   color: #F4ECDF;
+  font-family: Georgia, "Times New Roman", serif;
   font-size: 46rpx;
   letter-spacing: 9rpx;
 }

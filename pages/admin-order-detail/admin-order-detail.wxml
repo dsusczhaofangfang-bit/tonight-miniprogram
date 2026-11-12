@@ -1,7 +1,7 @@
 <view class="admin-page" wx:if="{{order}}">
   <view class="admin-top">
     <view class="admin-top-main">
-      <text class="admin-brand">柠舍唔同</text>
+      <text class="admin-brand">Tonight</text>
       <text class="admin-sub">老板管理 · 演示数据</text>
     </view>
     <view class="admin-top-actions">

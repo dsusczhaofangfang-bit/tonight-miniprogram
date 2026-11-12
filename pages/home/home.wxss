@@ -24,6 +24,7 @@
 
 .brand-cn {
   color: #F4ECDF;
+  font-family: Georgia, "Times New Roman", serif;
   font-size: 56rpx;
   line-height: 1.1;
   letter-spacing: 10rpx;

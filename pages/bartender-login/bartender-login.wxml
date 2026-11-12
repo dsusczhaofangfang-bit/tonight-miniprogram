@@ -1,7 +1,7 @@
 <view class="bt-login">
   <view class="bt-login-head">
     <text class="bt-login-kicker">STAFF · BAR</text>
-    <text class="bt-login-brand">柠舍唔同</text>
+    <text class="bt-login-brand">Tonight</text>
     <text class="bt-login-sub">COCKTAIL &amp; WHISKEY BAR</text>
   </view>
 
