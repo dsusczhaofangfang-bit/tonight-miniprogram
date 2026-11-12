@@ -32,23 +32,20 @@
 
 ## 界面预览
 
-<!-- 截图就绪后，删除下面这行的注释符号，即可显示 6 张截图。
-     命名规则与拍摄方法见 screenshots/README.md
-
 <p align="center">
-  <img src="screenshots/01-welcome.png" width="24%" alt="欢迎页">
-  <img src="screenshots/02-home.png" width="24%" alt="首页">
-  <img src="screenshots/03-menu.png" width="24%" alt="酒单">
-  <img src="screenshots/04-cart.png" width="24%" alt="购物车">
+  <img src="screenshots/01-welcome.png" width="23%" alt="欢迎页">
+  <img src="screenshots/02-home.png" width="23%" alt="首页">
+  <img src="screenshots/03-menu.png" width="23%" alt="酒单">
+  <img src="screenshots/04-cart.png" width="23%" alt="购物车">
 </p>
 <p align="center">
-  <img src="screenshots/05-admin-overview.png" width="24%" alt="老板管理端">
-  <img src="screenshots/06-bartender-board.png" width="24%" alt="调酒师工作台">
+  <img src="screenshots/05-order-confirm.png" width="23%" alt="订单确认">
+  <img src="screenshots/06-my.png" width="23%" alt="我的">
+  <img src="screenshots/07-bartender-board.png" width="23%" alt="调酒师工作台">
+  <img src="screenshots/08-admin-overview.png" width="23%" alt="老板经营概览">
 </p>
 
--->
-
-> 本地运行即可查看完整界面。
+> 截图取自开发者工具模拟器，内容为本地演示数据。
 
 ## 功能
 
