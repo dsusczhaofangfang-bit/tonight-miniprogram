@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        本项目是演示项目，范围被刻意收窄（见 README「已知限制」与「Roadmap」）。
+        本项目是演示项目，范围被刻意收窄（见 README「已知限制」）。
         请先说明你的建议解决什么问题，再谈怎么实现；与现有约束冲突的方案（例如引入第三方 UI 库、给管理端加第 5 个 Tab）大概率不会被采纳。
 
   - type: textarea
@@ -53,7 +53,7 @@ body:
     attributes:
       label: 提交前确认
       options:
-        - label: 我已读过 README 的「已知限制」与「Roadmap」，确认不是已有规划
+        - label: 我已读过 README 的「已知限制」，确认该建议不与其中的演示边界冲突
           required: true
         - label: 我理解这是演示项目，维护者可能不实现该建议
           required: true

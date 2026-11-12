@@ -1,14 +1,18 @@
 # Tonight · COCKTAIL & WHISKEY BAR
 
-**一家私人小酒馆的微信小程序 Demo**：顾客扫桌号二维码点单，订单实时流转到老板管理端与调酒师工作台。
+**预览版 Demo**：一家私人小酒馆的微信小程序原型，顾客扫桌号二维码点单，订单在老板管理端与调酒师工作台之间流转。
 纯微信原生（JavaScript / WXML / WXSS），零 npm 依赖、零网络请求、断网可跑，全部数据走本地 Mock。
 
+![Status](https://img.shields.io/badge/status-preview%20demo-orange)
 ![WeChat Mini Program](https://img.shields.io/badge/WeChat-Mini%20Program-07C160?logo=wechat&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?logo=javascript&logoColor=black)
 ![Dependencies](https://img.shields.io/badge/dependencies-0-success)
 ![License](https://img.shields.io/badge/license-Apache--2.0-blue)
 
-> **English** — A WeChat Mini Program demo for a single-location cocktail bar: QR-code table ordering, order lifecycle, an owner admin console and a bartender board. Runs entirely on local mock data (no backend, no network). Licensed under Apache-2.0.
+> ⚠️ **这是预览版**：仓库是一份完整的、可运行的交互与代码结构示例，用来展示点单流程与多角色界面。
+> 它**不接后端、不接支付**，也没有生产环境的服务端校验与实时推送；代码仅供参考，请勿直接用于线上经营。
+
+> **English** — A preview demo of a WeChat Mini Program for a single-location cocktail bar: QR-code table ordering, order lifecycle, an owner admin console and a bartender board. Runs entirely on local mock data (no backend, no network). For demonstration only; licensed under Apache-2.0.
 
 ---
 
@@ -23,7 +27,6 @@
 - [目录结构](#目录结构)
 - [文档](#文档)
 - [已知限制](#已知限制)
-- [Roadmap](#roadmap)
 - [授权](#授权)
 - [免责声明](#免责声明)
 
@@ -45,7 +48,7 @@
 
 -->
 
-> 本地运行后即可看到完整界面；`screenshots/` 目录已建好，放入图片后取消 README 里的注释即可展示。
+> 本地运行即可查看完整界面。
 
 ## 功能
 
@@ -91,7 +94,7 @@
 | 数据层 | `services/*` + `wx.storage` | 先 Mock 后接 CloudBase；换后端只改 services，不动页面 |
 | 数据版本 | `config/index.js` 的 `seedVersion` | 改种子数据后递增，客户端下次启动自动重建缓存 |
 | 金额 | 以「分」存储与计算，展示转元 | 避免浮点误差；`utils/format.yuanToFen()` 走字符串解析 |
-| 鉴权 | 本地口令 + 页面守卫（`admin-guard` / `bartender-guard`） | **仅演示**；正式版必须由云函数校验角色 |
+| 鉴权 | 本地口令 + 页面守卫（`admin-guard` / `bartender-guard`） | **仅演示**；生产环境必须由服务端校验角色 |
 | 字体 | 八公明朝 43 字子集 base64 内嵌 | 断网可用、不依赖网络字体；OFL 1.1 允许嵌入 |
 | 动效 | 全站仅欢迎页有纯 opacity 淡入 | 刻意克制，避免「模板感」 |
 
@@ -160,7 +163,7 @@ node scripts/verify_stage3.js && node scripts/verify_stage5.js \
 ├─ assets/                      # tabBar 图标、提示音、素材源文件（_src）
 ├─ docs/                        # 需求、设计、阶段交付说明、测试指引
 ├─ scripts/                     # 自检脚本与素材生成脚本（不进小程序包）
-├─ screenshots/                 # README 截图（放图后取消注释即生效）
+├─ screenshots/                 # README 截图
 ├─ .github/                     # Issue / PR 模板与 CI
 ├─ LICENSE / NOTICE / THIRD-PARTY-NOTICES.md
 └─ README.md
@@ -182,30 +185,20 @@ node scripts/verify_stage3.js && node scripts/verify_stage5.js \
 | [测试指引](docs/13-测试指引.md) | 从冒烟到调酒师端的逐页手工测试步骤 |
 | [需求文档](docs/01-需求文档.md) | 范围、功能、数据模型、页面要求、验收标准 |
 | [视觉设计准则](docs/04-视觉设计准则.md) | 色板、字体、结构与动效、文案与评审清单 |
-| [AI 交接说明](docs/06-AI交接说明.md) | 项目现状、16 条易踩坑、硬约束（接手前必读） |
+| [AI 交接说明](docs/06-AI交接说明.md) | 项目现状、16 条易踩坑、实现约束 |
 
 ## 已知限制
 
+以下是预览版**有意保留的边界**，不是尚待完成的任务；本仓库只作为演示留存，不承诺迭代。
+
 1. **没有后端**：所有数据在 `wx.storage`，清缓存 / 卸载即丢失；换设备不同步。
 2. **没有支付**：`payStatus` 恒为 `unpaid`，界面上不存在支付入口。
-3. **鉴权是假的**：口令写在客户端，只能做角色隔离演示；正式版必须云函数校验。
+3. **鉴权是模拟的**：口令写在客户端，只能演示角色隔离；生产环境必须由服务端校验，这不在本 Demo 范围内。
 4. **不是实时推送**：调酒师端是 5 秒本地轮询，页面已常驻「模拟实时」标注。
 5. **单品备注未做**：特殊制作要求只能写整单备注。
 6. **图片只读**：老板端不提供上传；`services/media.js` 只是预留契约。
-7. **真机走查未做**：iOS / Android 真机尚未验证，欢迎页字体混排仍需真机确认。
+7. **仅在开发者工具模拟器中验证**：iOS / Android 真机适配与欢迎页字体混排未做真机确认。
 8. **玫瑰视觉方案已废弃**：`assets/rose`、`assets/petals` 与 3 个玫瑰组件保留在仓库作历史记录，已排除出小程序包。
-
-## Roadmap
-
-- [x] M0 骨架：目录、主题 token、Mock 数据、services、开发自检页
-- [x] 欢迎页（纯文字排版 + 字体子集化）
-- [x] 首页 / 酒单 / 商品详情
-- [x] 购物车 / 订单确认 / 我的订单 / 订单详情
-- [x] 老板管理端（概览、订单、商品）
-- [x] 调酒师工作台（轮询提醒、接单、异常）
-- [ ] 真机走查（iOS / Android）
-- [ ] CloudBase 接入（订单实时订阅、服务端鉴权与金额核算）
-- [ ] 微信支付（需商户号与经营资质）
 
 ## 授权
 

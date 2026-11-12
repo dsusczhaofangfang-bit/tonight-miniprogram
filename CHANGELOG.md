@@ -15,7 +15,7 @@
 
 ### Changed
 
-- `README.md` 重构为 GitHub 项目主页：徽章、功能一览、快速开始、演示账号、已知限制、Roadmap、授权与免责声明
+- `README.md` 重构为 GitHub 项目主页：徽章、功能一览、快速开始、演示账号、已知限制、授权与免责声明
 - 文档配图统一移入 `docs/assets/`（原 `docs/refs/` 目录取消）
 - `.gitignore` 补充系统与临时文件规则
 
