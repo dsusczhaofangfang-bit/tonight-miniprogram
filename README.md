@@ -195,7 +195,6 @@ node scripts/verify_stage3.js && node scripts/verify_stage5.js \
 5. **单品备注未做**：特殊制作要求只能写整单备注。
 6. **图片只读**：老板端不提供上传；`services/media.js` 只是预留契约。
 7. **仅在开发者工具模拟器中验证**：iOS / Android 真机适配与欢迎页字体混排未做真机确认。
-8. **玫瑰视觉方案已废弃**：`assets/rose`、`assets/petals` 与 3 个玫瑰组件保留在仓库作历史记录，已排除出小程序包。
 
 ## 授权
 
